@@ -1,0 +1,104 @@
+/* ============================================================================
+ * Sakura Sushi Catering — base stylesheet (css/style.css)
+ * ----------------------------------------------------------------------------
+ * DELIBERATELY MINIMAL. This is the functional-foundation pass; a later polish
+ * pass owns real visual design + animation. Keep selectors class-based and
+ * predictable so they can be extended/overridden without markup changes.
+ * ==========================================================================*/
+:root {
+  --ink: #222; --muted: #666; --line: #ddd; --accent: #b5305f; --bg: #fff;
+  --panel: #f7f7f7; --ok: #1a7f37; --warn: #a12a2a;
+  --maxw: 1080px;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--ink); background: var(--bg); line-height: 1.5; }
+a { color: var(--accent); }
+img { max-width: 100%; display: block; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 16px; }
+
+#site-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+#site-header .brand { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--ink); }
+.site-nav { display: flex; flex-wrap: wrap; gap: 12px; }
+.site-nav a { text-decoration: none; }
+
+#site-footer { border-top: 1px solid var(--line); margin-top: 40px; padding: 20px 16px;
+  color: var(--muted); font-size: .9rem; }
+
+h1, h2, h3 { line-height: 1.2; }
+section { padding: 24px 0; }
+
+.hero { padding: 40px 0; border-bottom: 1px solid var(--line); }
+.cta { display: inline-block; margin-top: 12px; padding: 10px 16px; background: var(--accent);
+  color: #fff; text-decoration: none; border-radius: 6px; }
+
+/* Menu display */
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.menu-card { border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
+.mc-head { display: flex; justify-content: space-between; gap: 8px; font-weight: 600; }
+.mc-price { color: var(--accent); white-space: nowrap; }
+.mc-desc { color: var(--muted); font-size: .92rem; margin: 6px 0; }
+.mc-meta { font-size: .8rem; color: var(--muted); margin: 2px 0; }
+.tag { display: inline-block; font-size: .72rem; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 10px; padding: 1px 8px; margin-right: 3px; }
+
+/* Builder */
+.builder-cat { margin-bottom: 16px; }
+.builder-item { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px;
+  align-items: center; border-bottom: 1px solid var(--line); padding: 8px 0; }
+.builder-item .bi-desc { grid-column: 1 / -1; color: var(--muted); font-size: .85rem; }
+.builder-item .bi-price { color: var(--accent); font-size: .9rem; }
+.bi-controls { display: flex; align-items: center; gap: 6px; }
+.bi-controls input { width: 56px; text-align: center; padding: 4px; }
+.bi-controls button { width: 32px; height: 32px; cursor: pointer; }
+
+.builder-cols { display: grid; grid-template-columns: 1fr; gap: 24px; }
+@media (min-width: 860px) { .builder-cols { grid-template-columns: 1.4fr 1fr; } }
+
+.cart-panel { border: 1px solid var(--line); border-radius: 8px; padding: 16px;
+  background: var(--panel); position: sticky; top: 12px; }
+.cart-panel table { width: 100%; border-collapse: collapse; }
+.cart-panel th, .cart-panel td { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--line); }
+.cart-panel td:nth-child(2), .cart-panel td:nth-child(3), .cart-panel td:nth-child(4) { text-align: right; }
+.cart-total-row td { font-weight: 700; }
+#cart-warning { color: var(--warn); font-size: .9rem; }
+
+/* Recommender */
+.recommend-box { background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+  padding: 12px; margin-bottom: 16px; }
+.recommend-box input { width: 90px; padding: 6px; }
+#recommend-out { margin-top: 8px; color: var(--ink); }
+
+/* Form */
+#booking-form label { display: block; margin: 10px 0 4px; font-weight: 600; }
+#booking-form input, #booking-form textarea, #booking-form select {
+  width: 100%; max-width: 480px; padding: 8px; border: 1px solid var(--line); border-radius: 6px; }
+.radio-row { display: flex; gap: 20px; }
+.radio-row label { display: inline-flex; align-items: center; gap: 6px; font-weight: 400; margin: 0; }
+.radio-row input { width: auto; }
+button[type="submit"], .btn { margin-top: 16px; padding: 10px 18px; background: var(--accent);
+  color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; }
+#form-errors { background: #fdecec; border: 1px solid var(--warn); color: var(--warn);
+  border-radius: 6px; padding: 12px; margin: 12px 0; }
+#booking-confirm { background: #eafaef; border: 1px solid var(--ok); border-radius: 6px;
+  padding: 16px; margin: 16px 0; }
+
+/* Admin */
+.req-card { border: 1px solid var(--line); border-radius: 8px; padding: 14px; margin-bottom: 14px; }
+.req-card[data-status="confirmed"] { border-color: var(--ok); background: #f2fbf5; }
+.req-status { font-size: .8rem; color: var(--muted); }
+.req-meta { font-size: .8rem; color: var(--muted); }
+.req-card button { margin-top: 8px; margin-right: 8px; padding: 6px 12px; cursor: pointer; }
+.price-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 6px 0; border-bottom: 1px solid var(--line); }
+.price-row label { flex: 1 1 260px; }
+.price-row input { width: 100px; padding: 6px; }
+.price-flag { color: var(--accent); font-size: .8rem; }
+
+.faq-item { border-bottom: 1px solid var(--line); padding: 12px 0; }
+.testimonial { border-left: 3px solid var(--accent); padding: 4px 0 4px 14px; margin: 12px 0; color: var(--muted); }
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.gallery-ph { background: var(--panel); border: 1px dashed var(--line); border-radius: 8px;
+  aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; color: var(--muted); }

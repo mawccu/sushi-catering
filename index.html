@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sakura Sushi Catering — Fresh Sushi Catering for Any Event</title>
+  <meta name="description" content="Sakura Sushi Catering — hand-rolled sushi platters, party trays, and per-person packages for events across the SF Bay Area. Build a live quote online.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <h1 data-site="name">Sakura Sushi Catering</h1>
+      <p data-site="tagline"></p>
+      <p>Serving <span data-site="serviceArea"></span>. Call <span data-site="phone"></span> or build a quote below.</p>
+      <a class="cta" href="#builder">Build Your Quote</a>
+    </section>
+
+    <!-- MENU DISPLAY -->
+    <section id="menu">
+      <h2>Our Catering Menu</h2>
+      <p>Every order is hand-rolled the morning of your event. Prices below reflect current pricing.</p>
+      <div id="menu-display"></div>
+    </section>
+
+    <!-- QUOTE BUILDER -->
+    <section id="builder">
+      <h2>Build Your Quote</h2>
+      <p>Tell us your headcount for a smart recommendation, or pick items directly. The total updates live.</p>
+
+      <div class="recommend-box">
+        <label for="guest-count">How many guests?</label>
+        <input type="number" id="guest-count" min="1" step="1" placeholder="e.g. 20">
+        <button type="button" id="btn-recommend" class="btn">Recommend party trays</button>
+        <div id="recommend-out"></div>
+      </div>
+
+      <div class="builder-cols">
+        <div id="builder-list"><!-- rendered by builder.js --></div>
+
+        <aside class="cart-panel">
+          <h3>Your Quote</h3>
+          <table>
+            <thead><tr><th>Item</th><th>Price</th><th>Qty</th><th>Total</th></tr></thead>
+            <tbody id="cart-lines"><tr><td colspan="4">No items selected yet.</td></tr></tbody>
+            <tfoot>
+              <tr><td colspan="3">Subtotal</td><td id="cart-subtotal">$0.00</td></tr>
+              <tr><td colspan="3">Delivery fee</td><td id="cart-deliveryfee">$0.00</td></tr>
+              <tr class="cart-total-row"><td colspan="3">Total</td><td id="cart-total">$0.00</td></tr>
+            </tfoot>
+          </table>
+          <p id="cart-warning" style="display:none"></p>
+          <p><small>Minimum order <span data-site="minOrder"></span>. Delivery fee applies to delivery orders only.</small></p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- BOOKING / QUOTE REQUEST FORM -->
+    <section id="booking">
+      <h2>Request Your Quote</h2>
+      <p>Submit the items above along with your event details. We'll confirm availability within one business day.</p>
+
+      <div id="form-errors" style="display:none"></div>
+      <div id="booking-confirm" style="display:none"></div>
+
+      <form id="booking-form" novalidate>
+        <label for="f-name">Full name *</label>
+        <input id="f-name" name="name" type="text" autocomplete="name">
+
+        <label for="f-email">Email *</label>
+        <input id="f-email" name="email" type="email" autocomplete="email">
+
+        <label for="f-phone">Phone *</label>
+        <input id="f-phone" name="phone" type="tel" autocomplete="tel">
+
+        <label for="f-date">Event date *</label>
+        <input id="f-date" name="eventDate" type="date">
+
+        <label for="f-guests">Guest count *</label>
+        <input id="f-guests" name="guests" type="number" min="1" step="1">
+
+        <label>Fulfillment *</label>
+        <div class="radio-row">
+          <label><input type="radio" name="fulfillment" value="pickup" checked> Pickup</label>
+          <label><input type="radio" name="fulfillment" value="delivery"> Delivery</label>
+        </div>
+
+        <div id="address-row" style="display:none">
+          <label for="f-address">Delivery address *</label>
+          <input id="f-address" name="address" type="text" autocomplete="street-address">
+        </div>
+
+        <label for="f-notes">Allergies, dietary restrictions, special requests</label>
+        <textarea id="f-notes" name="notes" rows="3" placeholder="e.g. 2 guests are gluten-free, please label vegetarian trays"></textarea>
+
+        <button type="submit">Submit quote request</button>
+      </form>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+      <h2>What Clients Say</h2>
+      <blockquote class="testimonial">"Sakura catered our 80-person launch party and every tray was gone. Effortless and gorgeous." — Priya M., Product Launch</blockquote>
+      <blockquote class="testimonial">"Punctual, professional, and the sashimi boat was a showstopper. Booking again for the holidays." — Daniel R., Corporate Event</blockquote>
+      <blockquote class="testimonial">"They handled three separate dietary needs without a hitch. Highly recommend." — The Nguyen Family Reunion</blockquote>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/site.js"></script>
+  <script src="js/menu-display.js"></script>
+  <script src="js/builder.js"></script>
+</body>
+</html>
