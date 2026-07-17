@@ -5,107 +5,206 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sakura Sushi Catering — Fresh Sushi Catering for Any Event</title>
   <meta name="description" content="Sakura Sushi Catering — hand-rolled sushi platters, party trays, and per-person packages for events across the SF Bay Area. Build a live quote online.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%2314171d'/%3E%3Ccircle cx='16' cy='16' r='10' fill='%23f6efe0'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23e05648'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <header id="site-header"></header>
 
-  <main class="wrap">
+  <main>
     <!-- HERO -->
     <section class="hero">
-      <h1 data-site="name">Sakura Sushi Catering</h1>
-      <p data-site="tagline"></p>
-      <p>Serving <span data-site="serviceArea"></span>. Call <span data-site="phone"></span> or build a quote below.</p>
-      <a class="cta" href="#builder">Build Your Quote</a>
+      <div class="hero-seigaiha" aria-hidden="true"></div>
+      <div class="petals" aria-hidden="true"></div>
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow hero-eyebrow"><span class="jp">鮨</span> SF Bay Area · Est. 2014</p>
+          <h1 class="hero-title">
+            <span class="line"><span>Hand-rolled.</span></span>
+            <span class="line"><span>Event-ready.</span></span>
+            <span class="line"><span class="accent-word">Unforgettable.</span></span>
+          </h1>
+          <p class="hero-tag" data-site="tagline"></p>
+          <p class="hero-meta">Serving <span data-site="serviceArea"></span> · <span data-site="phone"></span></p>
+          <div class="hero-cta">
+            <a class="cta" href="#builder">Build Your Quote</a>
+            <a class="cta cta-ghost" href="#menu">Browse the Menu</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 440 430" xmlns="http://www.w3.org/2000/svg" role="img">
+            <!-- roe dots -->
+            <g class="float-d">
+              <circle cx="52" cy="90" r="6" fill="#e05648" opacity=".55"/>
+              <circle cx="80" cy="64" r="4" fill="#c9a15c" opacity=".6"/>
+              <circle cx="398" cy="290" r="5" fill="#c9a15c" opacity=".5"/>
+              <circle cx="376" cy="322" r="7" fill="#e05648" opacity=".4"/>
+              <circle cx="60" cy="360" r="4" fill="#f0796a" opacity=".5"/>
+            </g>
+            <!-- chopsticks -->
+            <g class="float-c">
+              <rect x="18" y="286" width="212" height="9" rx="4.5" fill="#c9a15c" transform="rotate(-32 124 290)"/>
+              <rect x="30" y="312" width="212" height="9" rx="4.5" fill="#a8813f" transform="rotate(-32 136 316)"/>
+            </g>
+            <!-- maki cross-section -->
+            <g class="float-a">
+              <circle cx="235" cy="228" r="132" fill="#20242e" stroke="#3b4252" stroke-width="3"/>
+              <circle cx="235" cy="228" r="106" fill="#f6efe2"/>
+              <g fill="#e6dac0">
+                <ellipse cx="172" cy="182" rx="10" ry="4.2" transform="rotate(-28 172 182)"/>
+                <ellipse cx="200" cy="152" rx="10" ry="4.2" transform="rotate(-8 200 152)"/>
+                <ellipse cx="246" cy="140" rx="10" ry="4.2" transform="rotate(14 246 140)"/>
+                <ellipse cx="292" cy="164" rx="10" ry="4.2" transform="rotate(38 292 164)"/>
+                <ellipse cx="312" cy="212" rx="10" ry="4.2" transform="rotate(66 312 212)"/>
+                <ellipse cx="306" cy="266" rx="10" ry="4.2" transform="rotate(102 306 266)"/>
+                <ellipse cx="272" cy="304" rx="10" ry="4.2" transform="rotate(130 272 304)"/>
+                <ellipse cx="220" cy="316" rx="10" ry="4.2" transform="rotate(166 220 316)"/>
+                <ellipse cx="172" cy="296" rx="10" ry="4.2" transform="rotate(-158 172 296)"/>
+                <ellipse cx="150" cy="250" rx="10" ry="4.2" transform="rotate(-118 150 250)"/>
+                <ellipse cx="152" cy="216" rx="10" ry="4.2" transform="rotate(-80 152 216)"/>
+              </g>
+              <circle cx="235" cy="228" r="46" fill="#e05648"/>
+              <path d="M235 228 L281 228 A46 46 0 0 0 258 188 Z" fill="#f0796a"/>
+              <circle cx="284" cy="196" r="12" fill="#7e8f5c"/>
+              <circle cx="186" cy="262" r="12" fill="#c9a15c"/>
+              <circle cx="196" cy="192" r="9" fill="#f0796a" opacity=".8"/>
+            </g>
+            <!-- nigiri -->
+            <g class="float-b" transform="translate(352 78)">
+              <ellipse cx="0" cy="26" rx="56" ry="21" fill="#f6efe2"/>
+              <rect x="-60" y="-6" width="120" height="32" rx="16" fill="#e05648"/>
+              <path d="M-34 -4 q7 15 3 28 M-2 -4 q7 15 3 28 M30 -4 q7 15 3 28" stroke="#f6a08d" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <rect x="-13" y="-12" width="26" height="46" rx="5" fill="#20242e" opacity=".9"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <svg class="hero-wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,42 C220,86 440,4 720,24 C1000,44 1220,8 1440,46 L1440,70 L0,70 Z" fill="#f8f3ea"/>
+      </svg>
     </section>
 
     <!-- MENU DISPLAY -->
-    <section id="menu">
-      <h2>Our Catering Menu</h2>
-      <p>Every order is hand-rolled the morning of your event. Prices below reflect current pricing.</p>
-      <div id="menu-display"></div>
+    <section id="menu" class="band">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow"><span class="jp">献立</span> The Menu</p>
+          <h2>Our Catering Menu</h2>
+          <p class="lede">Every order is hand-rolled the morning of your event. Prices below reflect current pricing.</p>
+        </div>
+        <div id="menu-display"></div>
+      </div>
     </section>
 
     <!-- QUOTE BUILDER -->
-    <section id="builder">
-      <h2>Build Your Quote</h2>
-      <p>Tell us your headcount for a smart recommendation, or pick items directly. The total updates live.</p>
+    <section id="builder" class="band band-panel">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow"><span class="jp">見積</span> Live Estimate</p>
+          <h2>Build Your Quote</h2>
+          <p class="lede">Tell us your headcount for a smart recommendation, or pick items directly. The total updates live.</p>
+        </div>
 
-      <div class="recommend-box">
-        <label for="guest-count">How many guests?</label>
-        <input type="number" id="guest-count" min="1" step="1" placeholder="e.g. 20">
-        <button type="button" id="btn-recommend" class="btn">Recommend party trays</button>
-        <div id="recommend-out"></div>
-      </div>
+        <div class="recommend-box">
+          <label for="guest-count">How many guests?</label>
+          <input type="number" id="guest-count" min="1" step="1" placeholder="e.g. 20">
+          <button type="button" id="btn-recommend" class="btn">Recommend party trays</button>
+          <div id="recommend-out"></div>
+        </div>
 
-      <div class="builder-cols">
-        <div id="builder-list"><!-- rendered by builder.js --></div>
+        <div class="builder-cols">
+          <div id="builder-list"><!-- rendered by builder.js --></div>
 
-        <aside class="cart-panel">
-          <h3>Your Quote</h3>
-          <table>
-            <thead><tr><th>Item</th><th>Price</th><th>Qty</th><th>Total</th></tr></thead>
-            <tbody id="cart-lines"><tr><td colspan="4">No items selected yet.</td></tr></tbody>
-            <tfoot>
-              <tr><td colspan="3">Subtotal</td><td id="cart-subtotal">$0.00</td></tr>
-              <tr><td colspan="3">Delivery fee</td><td id="cart-deliveryfee">$0.00</td></tr>
-              <tr class="cart-total-row"><td colspan="3">Total</td><td id="cart-total">$0.00</td></tr>
-            </tfoot>
-          </table>
-          <p id="cart-warning" style="display:none"></p>
-          <p><small>Minimum order <span data-site="minOrder"></span>. Delivery fee applies to delivery orders only.</small></p>
-        </aside>
+          <aside class="cart-panel">
+            <h3>Your Quote</h3>
+            <table>
+              <thead><tr><th>Item</th><th>Price</th><th>Qty</th><th>Total</th></tr></thead>
+              <tbody id="cart-lines"><tr><td colspan="4">No items selected yet.</td></tr></tbody>
+              <tfoot>
+                <tr><td colspan="3">Subtotal</td><td id="cart-subtotal">$0.00</td></tr>
+                <tr><td colspan="3">Delivery fee</td><td id="cart-deliveryfee">$0.00</td></tr>
+                <tr class="cart-total-row"><td colspan="3">Total</td><td id="cart-total">$0.00</td></tr>
+              </tfoot>
+            </table>
+            <p id="cart-warning" style="display:none"></p>
+            <p><small>Minimum order <span data-site="minOrder"></span>. Delivery fee applies to delivery orders only.</small></p>
+          </aside>
+        </div>
       </div>
     </section>
 
     <!-- BOOKING / QUOTE REQUEST FORM -->
-    <section id="booking">
-      <h2>Request Your Quote</h2>
-      <p>Submit the items above along with your event details. We'll confirm availability within one business day.</p>
-
-      <div id="form-errors" style="display:none"></div>
-      <div id="booking-confirm" style="display:none"></div>
-
-      <form id="booking-form" novalidate>
-        <label for="f-name">Full name *</label>
-        <input id="f-name" name="name" type="text" autocomplete="name">
-
-        <label for="f-email">Email *</label>
-        <input id="f-email" name="email" type="email" autocomplete="email">
-
-        <label for="f-phone">Phone *</label>
-        <input id="f-phone" name="phone" type="tel" autocomplete="tel">
-
-        <label for="f-date">Event date *</label>
-        <input id="f-date" name="eventDate" type="date">
-
-        <label for="f-guests">Guest count *</label>
-        <input id="f-guests" name="guests" type="number" min="1" step="1">
-
-        <label>Fulfillment *</label>
-        <div class="radio-row">
-          <label><input type="radio" name="fulfillment" value="pickup" checked> Pickup</label>
-          <label><input type="radio" name="fulfillment" value="delivery"> Delivery</label>
+    <section id="booking" class="band">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow"><span class="jp">予約</span> Booking</p>
+          <h2>Request Your Quote</h2>
+          <p class="lede">Submit the items above along with your event details. We'll confirm availability within one business day.</p>
         </div>
 
-        <div id="address-row" style="display:none">
-          <label for="f-address">Delivery address *</label>
-          <input id="f-address" name="address" type="text" autocomplete="street-address">
-        </div>
+        <div id="form-errors" style="display:none"></div>
+        <div id="booking-confirm" style="display:none"></div>
 
-        <label for="f-notes">Allergies, dietary restrictions, special requests</label>
-        <textarea id="f-notes" name="notes" rows="3" placeholder="e.g. 2 guests are gluten-free, please label vegetarian trays"></textarea>
+        <form id="booking-form" novalidate>
+          <label for="f-name">Full name *</label>
+          <input id="f-name" name="name" type="text" autocomplete="name">
 
-        <button type="submit">Submit quote request</button>
-      </form>
+          <label for="f-email">Email *</label>
+          <input id="f-email" name="email" type="email" autocomplete="email">
+
+          <label for="f-phone">Phone *</label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel">
+
+          <label for="f-date">Event date *</label>
+          <input id="f-date" name="eventDate" type="date">
+
+          <label for="f-guests">Guest count *</label>
+          <input id="f-guests" name="guests" type="number" min="1" step="1">
+
+          <label>Fulfillment *</label>
+          <div class="radio-row">
+            <label><input type="radio" name="fulfillment" value="pickup" checked> Pickup</label>
+            <label><input type="radio" name="fulfillment" value="delivery"> Delivery</label>
+          </div>
+
+          <div id="address-row" style="display:none">
+            <label for="f-address">Delivery address *</label>
+            <input id="f-address" name="address" type="text" autocomplete="street-address">
+          </div>
+
+          <label for="f-notes">Allergies, dietary restrictions, special requests</label>
+          <textarea id="f-notes" name="notes" rows="3" placeholder="e.g. 2 guests are gluten-free, please label vegetarian trays"></textarea>
+
+          <button type="submit">Submit quote request</button>
+        </form>
+      </div>
     </section>
 
     <!-- TESTIMONIALS -->
-    <section id="testimonials">
-      <h2>What Clients Say</h2>
-      <blockquote class="testimonial">"Sakura catered our 80-person launch party and every tray was gone. Effortless and gorgeous." — Priya M., Product Launch</blockquote>
-      <blockquote class="testimonial">"Punctual, professional, and the sashimi boat was a showstopper. Booking again for the holidays." — Daniel R., Corporate Event</blockquote>
-      <blockquote class="testimonial">"They handled three separate dietary needs without a hitch. Highly recommend." — The Nguyen Family Reunion</blockquote>
+    <section id="testimonials" class="band band-dark">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow"><span class="jp">声</span> Kind Words</p>
+          <h2>What Clients Say</h2>
+        </div>
+        <div class="t-grid">
+          <blockquote class="testimonial">
+            <p>"Sakura catered our 80-person launch party and every tray was gone. Effortless and gorgeous."</p>
+            <footer>Priya M. · Product Launch</footer>
+          </blockquote>
+          <blockquote class="testimonial">
+            <p>"Punctual, professional, and the sashimi boat was a showstopper. Booking again for the holidays."</p>
+            <footer>Daniel R. · Corporate Event</footer>
+          </blockquote>
+          <blockquote class="testimonial">
+            <p>"They handled three separate dietary needs without a hitch. Highly recommend."</p>
+            <footer>The Nguyen Family Reunion</footer>
+          </blockquote>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -117,5 +216,6 @@
   <script src="js/site.js"></script>
   <script src="js/menu-display.js"></script>
   <script src="js/builder.js"></script>
+  <script src="js/polish.js"></script>
 </body>
 </html>

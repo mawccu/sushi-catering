@@ -4,27 +4,42 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin — Sakura Sushi Catering</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%2314171d'/%3E%3Ccircle cx='16' cy='16' r='10' fill='%23f6efe0'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23e05648'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <header id="site-header"></header>
-  <main class="wrap">
-    <section>
-      <h1>Owner Admin</h1>
-      <p><small>Data is stored locally in this browser (localStorage). No login — this is a static demo tool.</small></p>
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <p class="eyebrow"><span class="jp">主人</span> Back of House</p>
+        <h1>Owner Admin</h1>
+        <p class="lede">Data is stored locally in this browser (localStorage). No login — this is a static demo tool.</p>
+      </div>
     </section>
 
-    <section id="requests">
-      <h2>Quote Requests</h2>
-      <p id="requests-empty" style="display:none"><em>No quote requests yet.</em></p>
-      <div id="requests-list"></div>
+    <section id="requests" class="band">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Quote Requests</h2>
+        </div>
+        <p id="requests-empty" style="display:none"><em>No quote requests yet.</em></p>
+        <div id="requests-list"></div>
+      </div>
     </section>
 
-    <section id="prices">
-      <h2>Edit Menu Prices</h2>
-      <p>Changes apply immediately across the public site. Prices persist in this browser.</p>
-      <button type="button" id="btn-reset-prices" class="btn">Restore default prices</button>
-      <div id="price-editor"></div>
+    <section id="prices" class="band band-panel">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Edit Menu Prices</h2>
+          <p class="lede">Changes apply immediately across the public site. Prices persist in this browser.</p>
+        </div>
+        <button type="button" id="btn-reset-prices" class="btn">Restore default prices</button>
+        <div id="price-editor"></div>
+      </div>
     </section>
   </main>
   <footer id="site-footer"></footer>
@@ -34,5 +49,6 @@
   <script src="js/menu.js"></script>
   <script src="js/site.js"></script>
   <script src="js/admin.js"></script>
+  <script src="js/polish.js"></script>
 </body>
 </html>

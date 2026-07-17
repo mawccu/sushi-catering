@@ -43,7 +43,7 @@
       var when = new Date(r.createdAt).toLocaleString();
       return '<article class="req-card" data-status="' + r.status + '">' +
         '<h3>' + esc(r.name) + ' — ' + window.formatMoney(r.total) +
-        ' <span class="req-status">[' + r.status + ']</span></h3>' +
+        ' <span class="req-status">' + r.status + '</span></h3>' +
         '<p class="req-meta"><code>' + r.id + '</code> · submitted ' + esc(when) + '</p>' +
         '<p>Event: <strong>' + esc(r.eventDate) + '</strong> · ' + r.guests + ' guests · ' +
           esc(r.fulfillment) + (r.fulfillment === "delivery" ? " to " + esc(r.address) : "") + '</p>' +
