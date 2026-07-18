@@ -38,6 +38,7 @@
           easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
           smoothWheel: true
         });
+        window.__lenis = lenis;
         if (hasGsap) {
           lenis.on("scroll", function () { if (hasST) ScrollTrigger.update(); });
           gsap.ticker.add(function (time) { lenis.raf(time * 1000); });

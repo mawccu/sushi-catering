@@ -70,6 +70,34 @@
       </div>
     </div>
 
+    <!-- ==================== 3D NIGIRI CENTERPIECE (pinned) ============= -->
+    <section class="nigiri3d" id="nigiri3d" aria-label="Salmon nigiri assembling as you scroll">
+      <div class="n3-pin">
+        <div class="n3-head wrap">
+          <span class="sec-index mono">組み立て — Assembled as you scroll</span>
+          <span class="n3-hint mono" aria-hidden="true">Scroll <i>·</i> it comes together</span>
+        </div>
+        <div class="n3-stage">
+          <div class="nh-stage" aria-hidden="true">
+            <div class="nh-nigiri">
+              <img class="nh-layer nh-rice" src="assets/nigiri-rice.png" alt="" decoding="async">
+              <img class="nh-layer nh-salmon" src="assets/nigiri-salmon.png" alt="" decoding="async">
+              <img class="nh-layer nh-nori" src="assets/nigiri-nori-band.png" alt="" decoding="async">
+            </div>
+          </div>
+          <div class="n3-caption" id="n3-caption" aria-live="polite">
+            <span class="n3-step mono">01 — シャリ</span>
+            <p class="n3-line">The rice, pressed by hand.</p>
+          </div>
+          <div class="n3-fallback" id="n3-fallback" hidden>
+            <p class="n3-fb-kanji" aria-hidden="true">鮨</p>
+            <p class="n3-fb-line">Hand-pressed salmon nigiri.</p>
+            <a class="link-underline" href="craft.html">See how it's made →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============================= INTRO ============================== -->
     <section id="craft" class="sec">
       <div class="wrap">
@@ -98,6 +126,94 @@
       </div>
     </section>
 
+    <!-- ================= HOME NIGIRI — scroll-built (pinned) =========== -->
+    <section class="craft-stage home-nigiri" id="stage-home-nigiri" aria-label="Scroll-driven drawing: a salmon nigiri assembling as you scroll">
+      <div class="stage-pin">
+        <div class="stage-head wrap">
+          <span class="sec-index mono">組み立て — Watch one come together</span>
+          <span class="stage-progress mono" aria-hidden="true"><span class="stage-bar"><i></i></span><span class="stage-pct">000</span></span>
+        </div>
+        <div class="stage-body wrap">
+          <div class="stage-captions" id="hn-caps" aria-live="polite">
+            <div class="cap is-first">
+              <span class="cap-idx mono">01 — シャリ</span>
+              <p class="cap-line">Rice first, <span class="it">pressed twice.</span></p>
+              <p class="cap-note">Koshihikari at body temperature, seasoned with red vinegar. Held, never squeezed.</p>
+            </div>
+            <div class="cap">
+              <span class="cap-idx mono">02 — ネタ</span>
+              <p class="cap-line">The salmon <span class="it">lands.</span></p>
+              <p class="cap-note">Ōra King, cut at eleven degrees so the fat striping faces the light.</p>
+            </div>
+            <div class="cap">
+              <span class="cap-idx mono">03 — 仕上げ</span>
+              <p class="cap-line">Wrapped, brushed, <span class="it">sealed.</span></p>
+              <p class="cap-note">Nori, nikiri glaze, a scatter of sesame, and the seal of the house. One bite.</p>
+              <a class="cta magnetic" id="hn-cta" href="craft.html"><span>See the whole craft</span> <span class="arr">→</span></a>
+            </div>
+          </div>
+
+          <div class="stage-canvas">
+            <svg id="svg-home-nigiri" viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="hn-title">
+              <title id="hn-title">Technical ink drawing of a salmon nigiri assembling as you scroll</title>
+              <defs>
+                <linearGradient id="hnSalmonWash" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#E58363"/>
+                  <stop offset="1" stop-color="#C4522F"/>
+                </linearGradient>
+                <clipPath id="hnNoriClip"><rect id="hn-nori-clip-rect" x="400" y="272" width="120" height="200"/></clipPath>
+              </defs>
+
+              <text class="svg-kanji-bg" x="130" y="380" aria-hidden="true">鮨</text>
+
+              <g id="hn-grid" class="ink-hair">
+                <line x1="120" y1="452" x2="780" y2="452"/>
+                <path d="M120,444 v16 M780,444 v16"/>
+                <path class="reg" d="M96,120 h16 M104,112 v16"/>
+                <path class="reg" d="M788,120 h16 M796,112 v16"/>
+                <path class="reg" d="M96,500 h16 M104,492 v16"/>
+                <path class="reg" d="M788,500 h16 M796,492 v16"/>
+              </g>
+
+              <g id="hn-rice">
+                <path id="hn-rice-body" class="draw" d="M312,452 C296,414 310,368 356,350 C398,334 502,334 544,350 C590,368 604,414 588,452 C520,462 380,462 312,452 Z" fill="#FBF7EC"/>
+                <g id="hn-grains"></g>
+              </g>
+
+              <g id="hn-salmon">
+                <path id="hn-salmon-body" class="draw" d="M280,366 C292,330 360,308 450,306 C540,304 608,326 620,362 C624,376 612,384 598,380 C556,364 344,362 302,380 C288,384 276,378 280,366 Z" fill="url(#hnSalmonWash)" fill-opacity=".88"/>
+                <g id="hn-striations" class="stria">
+                  <path d="M328,354 C358,332 398,322 438,320"/>
+                  <path d="M388,358 C428,336 478,328 518,328"/>
+                  <path d="M458,356 C498,340 538,336 568,338"/>
+                  <path d="M540,354 C560,346 580,344 596,346"/>
+                </g>
+                <path id="hn-glaze" d="M318,332 C380,308 520,302 590,320" fill="none" stroke="rgba(255,252,244,.5)" stroke-width="9" stroke-linecap="round"/>
+              </g>
+
+              <g id="hn-nori" clip-path="url(#hnNoriClip)">
+                <path id="hn-nori-body" d="M420,298 C440,290 462,288 482,294 L493,446 C470,454 448,454 429,448 Z" fill="#181310"/>
+                <path d="M436,300 C440,344 442,398 442,444" fill="none" stroke="rgba(242,237,226,.14)" stroke-width="3"/>
+              </g>
+
+              <g id="hn-seeds">
+                <ellipse cx="380" cy="330" rx="4.5" ry="2.6" transform="rotate(-24 380 330)"/>
+                <ellipse cx="522" cy="326" rx="4.5" ry="2.6" transform="rotate(14 522 326)"/>
+                <ellipse cx="560" cy="342" rx="4" ry="2.4" transform="rotate(-8 560 342)"/>
+                <ellipse cx="348" cy="344" rx="4" ry="2.4" transform="rotate(30 348 344)"/>
+                <ellipse cx="470" cy="316" rx="4.5" ry="2.6" transform="rotate(-16 470 316)"/>
+              </g>
+
+              <g id="hn-stamp" transform="rotate(-7 770 132)">
+                <rect x="738" y="100" width="64" height="64" rx="5" fill="#C13A1C"/>
+                <text x="770" y="146" text-anchor="middle" class="stamp-kanji">桜</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============================== MENU ============================== -->
     <section id="menu" class="sec" style="padding-top:0">
       <div class="wrap">
@@ -109,6 +225,13 @@
           <p class="sec-lede" data-reveal>Every order is hand-rolled the morning of your event.
             Prices reflect current pricing and update live if the kitchen changes them.</p>
         </div>
+
+        <div class="salmon-menu" id="salmon-menu" data-reveal>
+          <p class="sm-instruct mono">Pick a cut — the fish is the menu <span aria-hidden="true">↓</span></p>
+          <div class="sm-canvas" id="sm-canvas"></div>
+          <div class="sm-legend" id="sm-legend" role="group" aria-label="Menu categories by cut of fish"></div>
+        </div>
+
         <div id="menu-display"></div>
       </div>
     </section>
@@ -249,10 +372,13 @@
   <script src="js/menu.js"></script>
   <script src="js/site.js"></script>
   <script src="js/menu-display.js"></script>
+  <script src="js/salmon-menu.js"></script>
   <script src="js/builder.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
   <script src="js/polish.js"></script>
+  <script src="js/home-nigiri.js"></script>
+  <script src="js/nigiri-hero.js"></script>
 </body>
 </html>

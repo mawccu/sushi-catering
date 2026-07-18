@@ -24,7 +24,7 @@
     ];
     host.innerHTML = cats.map(function (c, i) {
       var key = c[0];
-      return '<section class="menu-cat">' +
+      return '<section class="menu-cat" id="menucat-' + key + '" data-cat="' + key + '">' +
         '<header class="menu-cat-head" data-reveal>' +
           '<div>' +
             '<span class="cat-index mono">(0' + (i + 1) + ') — ' + c[2] + '</span>' +
