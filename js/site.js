@@ -8,6 +8,7 @@
 (function () {
   var NAV = [
     { href: "index.html",          label: "Home" },
+    { href: "craft.html",          label: "The Craft" },
     { href: "index.html#menu",     label: "Menu" },
     { href: "index.html#builder",  label: "Build a Quote" },
     { href: "about.html",          label: "About" },
@@ -91,7 +92,7 @@
           '<div><h4>Service</h4><p>' + window.SITE.serviceArea + '<br>Minimum order ' +
             window.formatMoney(window.SITE.minOrder) + ' · ' + window.SITE.leadTimeDays + ' days’ lead time</p></div>' +
           '<div><h4>Explore</h4><p>' +
-            '<a href="index.html#menu">Menu</a><br>' +
+            '<a href="index.html#menu">Menu</a> · <a href="craft.html">The Craft</a><br>' +
             '<a href="about.html">About</a> · <a href="faq.html">FAQ</a> · <a href="gallery.html">Gallery</a><br>' +
             '<a href="admin.html">Back of house</a></p></div>' +
         '</div>' +

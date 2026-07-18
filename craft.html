@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Craft — Sakura Sushi Catering</title>
+  <meta name="description" content="Scroll through the anatomy of our work: a salmon nigiri assembled layer by layer, and a whole salmon read down to its bones. Ink-drawn, scroll-driven.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F2EDE2'/%3E%3Ccircle cx='16' cy='16' r='9' fill='%23C13A1C'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Shippori+Mincho:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main>
+    <!-- ============================ PAGE HERO =========================== -->
+    <section class="page-hero craft-hero">
+      <p class="page-kanji" aria-hidden="true">職人</p>
+      <div class="eyebrow mono">Shokunin — The Craft</div>
+      <h1><span class="kl"><span>Two drawings,</span></span><span class="kl"><span class="it shu">moved by your hand.</span></span></h1>
+      <p class="lede" data-reveal>Scroll slowly. The first drawing assembles a nigiri the way we do
+        every morning — layer by layer. The second reads a whole salmon down to its bones,
+        the way the knife does.</p>
+      <div class="craft-scroll-cue mono" data-reveal>Scroll — the ink follows you <span class="cue-line" aria-hidden="true"></span></div>
+    </section>
+
+    <!-- ================= SCENE 01 — NIGIRI ASSEMBLY (pinned) ============ -->
+    <section class="craft-stage" id="stage-nigiri" aria-label="Scroll-driven drawing: a salmon nigiri assembling in five layers">
+      <div class="stage-pin">
+        <div class="stage-head wrap">
+          <span class="sec-index mono">(01) — 組立 The Assembly</span>
+          <span class="stage-progress mono" aria-hidden="true"><span class="stage-bar"><i></i></span><span class="stage-pct">000</span></span>
+        </div>
+        <div class="stage-body wrap">
+          <div class="stage-captions" id="caps-nigiri" aria-live="polite">
+            <div class="cap is-first">
+              <span class="cap-idx mono">01 / 05 — シャリ</span>
+              <p class="cap-line">Two hundred grains, <span class="it">pressed twice.</span></p>
+              <p class="cap-note">Koshihikari rice, body temperature, seasoned with red vinegar. Held, not squeezed.</p>
+            </div>
+            <div class="cap">
+              <span class="cap-idx mono">02 / 05 — 山葵</span>
+              <p class="cap-line">A breath of heat, <span class="it">hidden.</span></p>
+              <p class="cap-note">Fresh wasabi goes under the fish, never beside it. You taste it second.</p>
+            </div>
+            <div class="cap">
+              <span class="cap-idx mono">03 / 05 — ネタ</span>
+              <p class="cap-line">The salmon <span class="it">lands.</span></p>
+              <p class="cap-note">Ōra King, cut at eleven degrees so the fat striping faces the light.</p>
+            </div>
+            <div class="cap">
+              <span class="cap-idx mono">04 / 05 — 海苔</span>
+              <p class="cap-line">Wrapped once, <span class="it">held.</span></p>
+              <p class="cap-note">A single band of toasted nori — structure first, aroma second.</p>
+            </div>
+            <div class="cap">
+              <span class="cap-idx mono">05 / 05 — 仕上げ</span>
+              <p class="cap-line">Brushed, sealed, <span class="it">served.</span></p>
+              <p class="cap-note">Nikiri glaze, a scatter of sesame, and the seal of the house. Eighteen grams. One bite.</p>
+            </div>
+          </div>
+
+          <div class="stage-canvas">
+            <svg id="svg-nigiri" viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="nigiri-title">
+              <title id="nigiri-title">Technical ink drawing of a salmon nigiri assembling in layers</title>
+              <defs>
+                <linearGradient id="salmonWash" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#E58363"/>
+                  <stop offset="1" stop-color="#C4522F"/>
+                </linearGradient>
+                <clipPath id="noriClip"><rect id="nori-clip-rect" x="400" y="272" width="120" height="200"/></clipPath>
+              </defs>
+
+              <text class="svg-kanji-bg" x="130" y="380" aria-hidden="true">鮨</text>
+
+              <g id="n-grid" class="ink-hair">
+                <line x1="120" y1="452" x2="780" y2="452"/>
+                <path d="M120,444 v16 M780,444 v16"/>
+                <path class="reg" d="M96,120 h16 M104,112 v16"/>
+                <path class="reg" d="M788,120 h16 M796,112 v16"/>
+                <path class="reg" d="M96,500 h16 M104,492 v16"/>
+                <path class="reg" d="M788,500 h16 M796,492 v16"/>
+              </g>
+
+              <g id="n-rice">
+                <path id="rice-body" class="draw" d="M312,452 C296,414 310,368 356,350 C398,334 502,334 544,350 C590,368 604,414 588,452 C520,462 380,462 312,452 Z" fill="#FBF7EC"/>
+                <g id="n-grains"></g>
+              </g>
+
+              <g id="n-wasabi">
+                <path id="wasabi-body" class="draw" d="M428,342 C434,328 466,324 474,334 C478,342 468,350 450,350 C438,350 424,350 428,342 Z" fill="rgba(156,124,60,.55)"/>
+              </g>
+
+              <g id="n-salmon">
+                <path id="salmon-body" class="draw" d="M280,366 C292,330 360,308 450,306 C540,304 608,326 620,362 C624,376 612,384 598,380 C556,364 344,362 302,380 C288,384 276,378 280,366 Z" fill="url(#salmonWash)" fill-opacity=".88"/>
+                <g id="n-striations" class="stria">
+                  <path d="M328,354 C358,332 398,322 438,320"/>
+                  <path d="M388,358 C428,336 478,328 518,328"/>
+                  <path d="M458,356 C498,340 538,336 568,338"/>
+                  <path d="M540,354 C560,346 580,344 596,346"/>
+                </g>
+                <path id="n-glaze" d="M318,332 C380,308 520,302 590,320" fill="none" stroke="rgba(255,252,244,.5)" stroke-width="9" stroke-linecap="round"/>
+              </g>
+
+              <g id="n-nori" clip-path="url(#noriClip)">
+                <path id="nori-body" d="M420,298 C440,290 462,288 482,294 L493,446 C470,454 448,454 429,448 Z" fill="#181310"/>
+                <path d="M436,300 C440,344 442,398 442,444" fill="none" stroke="rgba(242,237,226,.14)" stroke-width="3"/>
+              </g>
+
+              <g id="n-seeds">
+                <ellipse cx="380" cy="330" rx="4.5" ry="2.6" transform="rotate(-24 380 330)"/>
+                <ellipse cx="522" cy="326" rx="4.5" ry="2.6" transform="rotate(14 522 326)"/>
+                <ellipse cx="560" cy="342" rx="4" ry="2.4" transform="rotate(-8 560 342)"/>
+                <ellipse cx="348" cy="344" rx="4" ry="2.4" transform="rotate(30 348 344)"/>
+                <ellipse cx="470" cy="316" rx="4.5" ry="2.6" transform="rotate(-16 470 316)"/>
+              </g>
+
+              <g id="n-callouts" class="callouts">
+                <g class="co" id="co-shari">
+                  <circle cx="588" cy="428" r="3.5"/>
+                  <path class="co-line" d="M594,426 L700,398"/>
+                  <text x="706" y="396"><tspan class="co-jp">シャリ</tspan><tspan x="706" dy="16">SHARI — PRESSED RICE</tspan></text>
+                </g>
+                <g class="co" id="co-neta">
+                  <circle cx="614" cy="344" r="3.5"/>
+                  <path class="co-line" d="M620,341 L716,300"/>
+                  <text x="722" y="298"><tspan class="co-jp">ネタ</tspan><tspan x="722" dy="16">ŌRA KING SALMON</tspan></text>
+                </g>
+                <g class="co" id="co-nori">
+                  <circle cx="430" cy="302" r="3.5"/>
+                  <path class="co-line" d="M424,298 L318,244"/>
+                  <text x="310" y="240" text-anchor="end"><tspan class="co-jp">海苔</tspan><tspan x="310" dy="16">NORI — TOASTED</tspan></text>
+                </g>
+                <g class="co" id="co-wasabi">
+                  <circle cx="426" cy="344" r="3.5"/>
+                  <path class="co-line" d="M419,342 L292,308"/>
+                  <text x="284" y="304" text-anchor="end"><tspan class="co-jp">山葵</tspan><tspan x="284" dy="16">WASABI — HIDDEN BENEATH</tspan></text>
+                </g>
+                <g class="co" id="co-dim">
+                  <path class="co-line" d="M312,480 L588,480 M312,472 v16 M588,472 v16"/>
+                  <text x="450" y="504" text-anchor="middle">≈ 72 MM — 18 G — ONE BITE</text>
+                </g>
+              </g>
+
+              <g id="n-stamp" transform="rotate(-7 770 132)">
+                <rect x="738" y="100" width="64" height="64" rx="5" fill="#C13A1C"/>
+                <text x="770" y="146" text-anchor="middle" class="stamp-kanji">桜</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INTERSTITIAL ============ -->
+    <section class="sec craft-between">
+      <div class="wrap">
+        <p class="between-line" data-reveal>Every piece begins the same way —
+          <span class="it">with a whole fish, and a reason for every cut.</span></p>
+      </div>
+    </section>
+
+    <!-- ================ SCENE 02 — SALMON ANATOMY (pinned) ============== -->
+    <section class="craft-stage band-ink" id="stage-salmon" aria-label="Scroll-driven drawing: a whole salmon revealed down to its skeleton">
+      <div class="stage-pin">
+        <div class="stage-head wrap">
+          <span class="sec-index mono">(02) — 解剖 The Anatomy</span>
+          <span class="stage-progress mono" aria-hidden="true"><span class="stage-bar"><i></i></span><span class="stage-pct">000</span></span>
+        </div>
+        <div class="stage-body wrap">
+          <div class="stage-captions" id="caps-salmon" aria-live="polite">
+            <div class="cap is-first">
+              <span class="cap-idx mono">01 / 04 — 姿</span>
+              <p class="cap-line">Whole. <span class="it">The silver side.</span></p>
+              <p class="cap-note">One Ōra King salmon, iced at four in the morning. This is where every menu item starts.</p>
+            </div>
+            <div class="cap">
+              <span class="cap-idx mono">02 / 04 — 庖丁</span>
+              <p class="cap-line">The knife knows <span class="it">the map.</span></p>
+              <p class="cap-note">Flesh lifts from bone in two long passes. Keep scrolling — the drawing reads the fish for you.</p>
+            </div>
+            <div class="cap">
+              <span class="cap-idx mono">03 / 04 — 脊椎</span>
+              <p class="cap-line">Sixty vertebrae, <span class="it">one line.</span></p>
+              <p class="cap-note">Ribs forward, tail spines aft. Pin bones pulled one by one with tweezers.</p>
+            </div>
+            <div class="cap">
+              <span class="cap-idx mono">04 / 04 — 骨</span>
+              <p class="cap-line">What remains <span class="it">is structure.</span></p>
+              <p class="cap-note">The frame becomes tomorrow's stock. Nothing hidden, nothing wasted.</p>
+            </div>
+          </div>
+
+          <div class="stage-canvas">
+            <svg id="svg-salmon" viewBox="0 0 1000 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="salmon-title">
+              <title id="salmon-title">Ink drawing of a whole salmon whose flesh is picked away head to tail, revealing the skeleton</title>
+              <defs>
+                <linearGradient id="fleshWash" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#D96A47" stop-opacity=".85"/>
+                  <stop offset=".55" stop-color="#C4522F" stop-opacity=".8"/>
+                  <stop offset="1" stop-color="#8E3B21" stop-opacity=".85"/>
+                </linearGradient>
+                <linearGradient id="scanFade" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#C13A1C" stop-opacity="0"/>
+                  <stop offset="1" stop-color="#C13A1C" stop-opacity=".38"/>
+                </linearGradient>
+                <clipPath id="skelClip"><rect id="skel-clip-rect" x="40" y="40" width="0" height="400"/></clipPath>
+                <clipPath id="fleshClip"><rect id="flesh-clip-rect" x="40" y="40" width="920" height="400"/></clipPath>
+                <clipPath id="bodyClip"><path d="M62,235 C120,152 250,112 420,110 C590,108 726,146 812,204 L826,214 C860,196 900,160 928,138 C918,180 906,214 892,236 C906,258 918,292 928,334 C900,312 860,276 826,258 L812,268 C726,326 590,364 420,362 C250,360 120,318 62,235 Z"/></clipPath>
+              </defs>
+
+              <text class="svg-kanji-bg on-ink" x="700" y="420" aria-hidden="true">骨</text>
+
+              <g id="s-flesh" clip-path="url(#fleshClip)">
+                <path d="M62,235 C120,152 250,112 420,110 C590,108 726,146 812,204 L826,214 C860,196 900,160 928,138 C918,180 906,214 892,236 C906,258 918,292 928,334 C900,312 860,276 826,258 L812,268 C726,326 590,364 420,362 C250,360 120,318 62,235 Z" fill="url(#fleshWash)"/>
+                <g clip-path="url(#bodyClip)">
+                  <g id="s-scales" class="scales"></g>
+                  <path class="flesh-line" d="M238,142 C206,192 206,278 240,318"/>
+                  <path class="flesh-line thin" d="M224,158 C198,200 198,266 224,304"/>
+                  <path class="flesh-line thin" d="M250,180 C700,150 780,190 818,214" opacity=".55"/>
+                  <path class="flesh-line" d="M62,235 C86,240 108,244 130,252"/>
+                  <g id="s-tailrays-flesh" class="flesh-line thin"></g>
+                </g>
+                <path class="fin" d="M446,111 C468,76 524,70 558,85 C542,100 520,108 506,111 Z"/>
+                <path class="fin" d="M668,124 C682,110 698,110 704,119 C696,126 684,128 674,127 Z"/>
+                <path class="fin" d="M252,268 C292,282 320,306 330,332 C300,328 270,308 254,288 Z"/>
+                <path class="fin" d="M466,346 C488,362 502,378 508,392 C488,384 470,368 460,352 Z"/>
+                <path class="fin" d="M638,340 C660,354 676,368 682,380 C664,374 648,360 636,346 Z"/>
+                <circle cx="152" cy="200" r="9" fill="#181310"/>
+                <circle cx="149" cy="197" r="2.6" fill="#F2EDE2" opacity=".8"/>
+              </g>
+
+              <g id="s-skel" clip-path="url(#skelClip)">
+                <g class="bone">
+                  <path d="M70,232 C84,196 122,168 168,158 C210,150 238,160 246,176"/>
+                  <path d="M70,240 C96,254 132,260 162,260 C176,260 190,256 200,250"/>
+                  <path d="M100,214 C124,220 148,228 162,238"/>
+                  <path d="M246,176 C260,206 260,262 244,300 C232,314 212,320 198,316"/>
+                  <circle cx="152" cy="200" r="14" fill="none"/>
+                  <circle cx="152" cy="200" r="3" class="bone-fill"/>
+                </g>
+                <g id="s-spine" class="bone"></g>
+                <g id="s-ribs" class="bone thin"></g>
+                <g id="s-tailrays" class="bone thin"></g>
+              </g>
+
+              <path id="s-outline" class="fish-outline" d="M62,235 C120,152 250,112 420,110 C590,108 726,146 812,204 L826,214 C860,196 900,160 928,138 C918,180 906,214 892,236 C906,258 918,292 928,334 C900,312 860,276 826,258 L812,268 C726,326 590,364 420,362 C250,360 120,318 62,235 Z"/>
+
+              <g id="s-labels" class="callouts on-ink">
+                <g class="co" id="sl-cranium">
+                  <circle cx="162" cy="162" r="3.5"/>
+                  <path class="co-line" d="M160,156 L140,92"/>
+                  <text x="136" y="84"><tspan class="co-jp">頭骨</tspan><tspan x="136" dy="16">CRANIUM</tspan></text>
+                </g>
+                <g class="co" id="sl-ribs">
+                  <circle cx="352" cy="308" r="3.5"/>
+                  <path class="co-line" d="M348,314 L316,412"/>
+                  <text x="310" y="432"><tspan class="co-jp">肋骨</tspan><tspan x="310" dy="16">RIBS — PIN BONES PULLED</tspan></text>
+                </g>
+                <g class="co" id="sl-spine">
+                  <circle cx="560" cy="226" r="3.5"/>
+                  <path class="co-line" d="M564,220 L600,74"/>
+                  <text x="604" y="64"><tspan class="co-jp">脊椎</tspan><tspan x="604" dy="16">VERTEBRAE — SIXTY</tspan></text>
+                </g>
+                <g class="co" id="sl-caudal">
+                  <circle cx="874" cy="292" r="3.5"/>
+                  <path class="co-line" d="M870,298 L846,408"/>
+                  <text x="840" y="428"><tspan class="co-jp">尾鰭</tspan><tspan x="840" dy="16">CAUDAL RAYS</tspan></text>
+                </g>
+              </g>
+
+              <g id="s-scan" aria-hidden="true">
+                <rect x="-30" y="52" width="30" height="366" fill="url(#scanFade)"/>
+                <line x1="0" y1="52" x2="0" y2="418" stroke="#C13A1C" stroke-width="2"/>
+                <path d="M-6,44 L6,44 L0,56 Z" fill="#C13A1C"/>
+                <text class="scan-read" x="10" y="46">FLESH → BONE</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== OUTRO ============================= -->
+    <section class="sec craft-outro">
+      <div class="wrap">
+        <p class="between-line" data-reveal>That is the whole trick — <span class="it">there is no trick.</span>
+          Just the same careful sequence, repeated for every guest you invite.</p>
+        <div class="hero-cta-row" data-reveal>
+          <a class="cta magnetic" href="index.html#builder"><span>Build your quote</span> <span class="arr">→</span></a>
+          <a class="link-underline" href="index.html#menu">Browse the menu</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="js/polish.js"></script>
+  <script src="js/craft.js"></script>
+</body>
+</html>
