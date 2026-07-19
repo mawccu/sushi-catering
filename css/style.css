@@ -18,6 +18,8 @@
   --shu:      #C13A1C;
   --shu-deep: #A02F14;
   --gold:     #9C7C3C;
+  --bone:      #EFE9DA;
+  --bone-edge: #C9BFA8;
   --line:     rgba(27, 23, 18, .16);
   --line-strong: rgba(27, 23, 18, .8);
   --serif: "Instrument Serif", Georgia, serif;
@@ -1189,39 +1191,57 @@ details[open] .faq-x::after { background: var(--shu); }
   color: var(--ink-soft); text-align: center; margin-bottom: 10px;
   letter-spacing: .14em; text-transform: uppercase;
 }
-.sm-instruct span { color: var(--shu); }
+.sm-instruct span, .sm-instruct b { color: var(--shu); font-weight: 500; }
 .sm-canvas { max-width: 1000px; margin: 0 auto; }
 .sm-svg { width: 100%; height: auto; display: block; overflow: visible; }
 
-.sm-bones line, .sm-bones path, .sm-bones circle {
-  stroke: var(--ink); stroke-width: 1.8; fill: none;
-  stroke-linecap: round; stroke-opacity: .68;
-}
-.sm-bones .thin { stroke-width: 1.1; stroke-opacity: .5; }
-
-.sm-flesh { transition: opacity .55s cubic-bezier(.4,0,.1,1); }
-.sm-flesh.lift { opacity: .1; }
-
-.sm-outline { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linejoin: round; }
+/* -- skeleton -- */
+.sm-bone { stroke: var(--ink); fill: none; stroke-linecap: round; stroke-width: 1.7; stroke-opacity: .62; }
+.sm-bone.thin { stroke-width: 1.05; stroke-opacity: .42; }
+.sm-spine { stroke: var(--ink); fill: none; stroke-width: 2.4; stroke-opacity: .7; stroke-linecap: round; }
 .sm-eye { fill: var(--ink); }
-.sm-div { stroke: rgba(242,237,226,.5); stroke-width: 1.5; stroke-dasharray: 3 6; }
+.sm-eye-socket { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-opacity: .6; }
 
-.sm-hit { fill: transparent; cursor: pointer; }
-.sm-jp {
-  font-family: var(--kanji); font-weight: 700; font-size: 26px;
-  fill: var(--ink); opacity: .28; transition: opacity .35s, fill .35s;
-}
-.sm-cutname {
-  font-family: var(--mono); font-size: 11px; letter-spacing: .22em;
-  fill: var(--ink-soft); opacity: 0; transition: opacity .35s;
-}
-.sm-region.hot .sm-jp { opacity: 1; fill: var(--shu); }
-.sm-region.hot .sm-cutname { opacity: 1; }
+/* -- flesh fillets: peel apart when the section is skinned -- */
+.sm-fillet { transition: transform 1s cubic-bezier(.5,0,.12,1), opacity .9s ease; }
+.sm-skin-edge { fill: none; stroke: #D9A9B4; stroke-width: 3; stroke-opacity: .7; }
+.is-skinned .sm-fillet-top { transform: translateY(-46px) rotate(-1.2deg); opacity: 0; }
+.is-skinned .sm-fillet-bot { transform: translateY(46px) rotate(1.2deg); opacity: 0; }
 
-/* legend — the accessible controls */
+/* -- selector dog-bones -- */
+.sm-pick { cursor: pointer; outline: none; }
+.sm-slat, .sm-knob { fill: var(--bone); stroke: var(--bone-edge); stroke-width: 1.6; transition: fill .3s, stroke .3s; }
+.sm-name { font-family: var(--serif); font-size: 21px; fill: var(--ink); letter-spacing: .01em; transition: fill .3s; }
+.sm-jp { font-family: var(--kanji); font-weight: 700; font-size: 19px; fill: var(--shu); transition: fill .3s; }
+.sm-count { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; fill: var(--ink-soft); transition: fill .3s; }
+
+/* pop up from the spine after the flesh has peeled (staggered) */
+.sm-pick {
+  transform: translateY(34px) scaleY(.34); transform-box: fill-box; transform-origin: 50% 100%;
+  opacity: 0; transition: transform .62s cubic-bezier(.34,1.56,.5,1), opacity .5s ease;
+}
+.is-skinned .sm-pick { transform: none; opacity: 1; }
+.is-skinned .sm-pick.d0 { transition-delay: .60s; }
+.is-skinned .sm-pick.d1 { transition-delay: .70s; }
+.is-skinned .sm-pick.d2 { transition-delay: .80s; }
+.is-skinned .sm-pick.d3 { transition-delay: .90s; }
+
+/* lift + flush vermilion on hover / focus / selected */
+.sm-lift { transition: transform .32s cubic-bezier(.34,1.4,.5,1); }
+.sm-pick:hover .sm-lift, .sm-pick.hover .sm-lift,
+.sm-pick:focus-visible .sm-lift, .sm-pick.on .sm-lift { transform: translateY(-16px); }
+.sm-pick:hover .sm-slat, .sm-pick.hover .sm-slat, .sm-pick:focus-visible .sm-slat, .sm-pick.on .sm-slat,
+.sm-pick:hover .sm-knob, .sm-pick.hover .sm-knob, .sm-pick:focus-visible .sm-knob, .sm-pick.on .sm-knob {
+  fill: var(--shu); stroke: var(--shu);
+}
+.sm-pick:hover .sm-name, .sm-pick.hover .sm-name, .sm-pick:focus-visible .sm-name, .sm-pick.on .sm-name,
+.sm-pick:hover .sm-jp, .sm-pick.hover .sm-jp, .sm-pick:focus-visible .sm-jp, .sm-pick.on .sm-jp { fill: var(--paper); }
+.sm-pick:hover .sm-count, .sm-pick.hover .sm-count, .sm-pick:focus-visible .sm-count, .sm-pick.on .sm-count { fill: rgba(242,237,226,.85); }
+
+/* legend — the accessible mirror control */
 .sm-legend {
   display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 12px; max-width: 1000px; margin: 22px auto 0;
+  gap: 12px; max-width: 1000px; margin: 26px auto 0;
 }
 .sm-cut-btn {
   display: flex; flex-direction: column; gap: 6px; text-align: left;
@@ -1246,7 +1266,10 @@ details[open] .faq-x::after { background: var(--shu); }
 }
 .sm-reset:hover { text-decoration: underline; }
 
+@media (prefers-reduced-motion: reduce) {
+  .sm-fillet, .sm-pick, .sm-lift { transition: none; }
+}
 @media (max-width: 720px) {
   .sm-legend { grid-template-columns: repeat(2, 1fr); }
-  .sm-jp { font-size: 30px; }
+  .sm-name { font-size: 24px; }
 }
