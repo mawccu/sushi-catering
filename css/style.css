@@ -1110,9 +1110,9 @@ details[open] .faq-x::after { background: var(--shu); }
    visible, never cropped) and feathered with a radial mask, so its grey backdrop
    melts into the matching pool and the pool melts into paper — a luminous studio
    window in the page, never a rectangular video block, sushi untouched. */
-.nigiri3d.hero-blend { position: relative; height: 340vh; background: var(--paper); border-top: 0; }
+.nigiri3d.hero-blend { position: relative; background: var(--paper); border-top: 0; }
 .hero-blend .n3-pin {
-  position: sticky; top: 0; height: 100vh; min-height: 100vh; overflow: hidden;
+  position: relative; height: 100vh; min-height: 540px; overflow: hidden;
   /* warm pool tuned to THIS clip's GRADED backdrop (the footage is colour-graded
      into the paper palette — the studio sweep now reads as a warm ivory ~#dcd6c6
      brightening to ~#e6ddc4, sampled from the graded frames). Three layers, back→
