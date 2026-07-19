@@ -71,7 +71,7 @@
 
     if (reduced) { setCaption(0); return; }   // hold on poster
 
-    var cur = 0, seeking = false;
+    var cur = 0, seeking = false, lastSet = -1;
     video.addEventListener("seeking", function () { seeking = true; });
     video.addEventListener("seeked", function () { seeking = false; });
 
@@ -103,7 +103,14 @@
       cur += (target - cur) * 0.2;
       if (Math.abs(target - cur) < 0.001) cur = target;
       if (!seeking && video.readyState >= 2) {
-        try { video.currentTime = clamp(cur, 0, duration - 0.001); } catch (e) {}
+        var want = clamp(cur, 0, duration - 0.001);
+        // The clip is all-intra at a modest frame rate, so seeking to a time
+        // inside the frame already shown just re-decodes the same picture and
+        // stutters. Only issue a new seek once we've moved ~half a frame away —
+        // far fewer decodes, much smoother scrub.
+        if (lastSet < 0 || Math.abs(want - lastSet) >= 0.028) {
+          try { video.currentTime = want; lastSet = want; } catch (e) {}
+        }
       }
       // detect "asked to scrub well past the start but frame is still at 0"
       if (target > 0.7 && video.currentTime < 0.12) {

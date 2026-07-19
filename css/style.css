@@ -1081,12 +1081,14 @@ details[open] .faq-x::after { background: var(--shu); }
 .nigiri3d.hero-blend { position: relative; height: 340vh; background: var(--paper); border-top: 0; }
 .hero-blend .n3-pin {
   position: sticky; top: 0; height: 100vh; min-height: 100vh; overflow: hidden;
-  /* studio pool tuned to THIS clip's backdrop (sampled from the file: a cool
-     neutral grey ~#b8bdba with a soft vignette). Three layers, painted back→front:
-       1. the grey pool itself — the clip's backdrop colour, so the feathered edge
-          of the clip melts into an identical grey with no seam on any screen;
+  /* warm pool tuned to THIS clip's GRADED backdrop (the footage is colour-graded
+     into the paper palette — the studio sweep now reads as a warm ivory ~#dcd6c6
+     brightening to ~#e6ddc4, sampled from the graded frames). Three layers, back→
+     front:
+       1. the warm pool itself — the clip's backdrop colour, so the feathered edge
+          of the clip melts into an identical warm tone with no seam on any screen;
        2. a soft top wash lifting the clip's slightly darker upper band back to the
-          pool grey (sits BEHIND the clip, so the sushi's pixels stay untouched);
+          pool tone (sits BEHIND the clip, so the sushi's pixels stay untouched);
        3. a top+bottom paper melt so the whole pinned panel dissolves into the
           paper sections above and below — never a rectangle sitting on the page. */
   background:
@@ -1094,10 +1096,10 @@ details[open] .faq-x::after { background: var(--shu); }
       var(--paper) 0%, rgba(242,237,226,0) 15%,
       rgba(242,237,226,0) 85%, var(--paper) 100%),
     radial-gradient(140% 56% at 50% -6%,
-      rgba(188,193,190,0.5) 0%, rgba(188,193,190,0) 58%),
-    radial-gradient(135% 120% at 50% 49%,
-      #bcc1be 0%, #b6bbb8 42%, #b1b5b2 60%, #bcbab1 72%,
-      #cfc9bc 82%, #e3ddd0 90%, var(--paper) 100%);
+      rgba(216,209,193,0.5) 0%, rgba(216,209,193,0) 58%),
+    radial-gradient(135% 122% at 50% 52%,
+      #ded8c8 0%, #d9d2c1 42%, #dcd5c5 60%, #e2dbcc 74%,
+      #eae3d5 84%, var(--paper) 98%);
 }
 /* The clip is sized to its OWN 16:9 box (never letterboxed inside a bigger frame):
    width/height resolve to whichever fits the pin, so the element edges ARE the clip
