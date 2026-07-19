@@ -45,13 +45,12 @@
         '<h3>' + esc(r.name) + ' — ' + window.formatMoney(r.total) +
         ' <span class="req-status">' + r.status + '</span></h3>' +
         '<p class="req-meta"><code>' + r.id + '</code> · submitted ' + esc(when) + '</p>' +
-        '<p>Event: <strong>' + esc(r.eventDate) + '</strong> · ' + r.guests + ' guests · ' +
-          esc(r.fulfillment) + (r.fulfillment === "delivery" ? " to " + esc(r.address) : "") + '</p>' +
+        '<p>Event: <strong>' + esc(r.eventDate) + '</strong> · ' + r.guests + ' guests' +
+          (r.address ? ' · venue: ' + esc(r.address) : '') + '</p>' +
         '<p>Contact: ' + esc(r.email) + ' · ' + esc(r.phone) + '</p>' +
         (r.notes ? '<p>Notes: ' + esc(r.notes) + '</p>' : '') +
         '<ul>' + items + '</ul>' +
-        '<p>Subtotal ' + window.formatMoney(r.subtotal) + ' + delivery ' +
-          window.formatMoney(r.deliveryFee) + ' = <strong>' + window.formatMoney(r.total) + '</strong></p>' +
+        '<p>Total <strong>' + window.formatMoney(r.total) + '</strong></p>' +
         '<button type="button" data-toggle="' + r.id + '">' +
           (r.status === "confirmed" ? "Mark as new" : "Mark confirmed") + '</button> ' +
         '<button type="button" data-del="' + r.id + '">Delete</button>' +

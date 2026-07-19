@@ -107,7 +107,7 @@
           <div>
             <p class="hero-tagline">Hand-rolled sushi catering for events of every size —
               composed the morning of your event from sustainably sourced fish,
-              delivered anywhere in Amman.</p>
+              set up and served at your venue across Amman.</p>
             <div class="hero-cta-row">
               <a class="cta magnetic" href="#builder"><span>Build your quote</span> <span class="arr">→</span></a>
               <a class="link-underline" href="#menu">Browse the menu</a>
@@ -183,8 +183,8 @@
               <p class="stat-label mono">Events catered</p>
             </div>
             <div class="stat">
-              <span class="stat-num"><span data-count="30">30</span><sup>mi</sup></span>
-              <p class="stat-label mono">Delivery radius</p>
+              <span class="stat-num"><span data-count="30">30</span><sup>km</sup></span>
+              <p class="stat-label mono">Catering radius</p>
             </div>
             <p class="intro-note">Never frozen-then-thawed fish. Every tray labeled
               for allergens. Vegetarian and vegan guests eat as well as everyone else.</p>
@@ -345,13 +345,11 @@
               <thead><tr><th>Item</th><th>Price</th><th>Qty</th><th>Total</th></tr></thead>
               <tbody id="cart-lines"><tr><td colspan="4">No items selected yet.</td></tr></tbody>
               <tfoot>
-                <tr><td colspan="3">Subtotal</td><td id="cart-subtotal">$0.00</td></tr>
-                <tr><td colspan="3">Delivery fee</td><td id="cart-deliveryfee">$0.00</td></tr>
-                <tr class="cart-total-row"><td colspan="3">Total</td><td id="cart-total">$0.00</td></tr>
+                <tr class="cart-total-row"><td colspan="3">Total</td><td id="cart-total">JD 0.00</td></tr>
               </tfoot>
             </table>
             <p id="cart-warning" style="display:none"></p>
-            <p><small>Minimum order <span data-site="minOrder"></span>. Delivery fee applies to delivery orders only.</small></p>
+            <p><small>Minimum order <span data-site="minOrder"></span>. On-site catering &amp; live presentation at your venue across Greater Amman.</small></p>
           </aside>
         </div>
       </div>
@@ -398,17 +396,10 @@
               <label for="f-guests">Guest count *</label>
               <input id="f-guests" name="guests" type="number" min="1" step="1">
             </div>
-            <div class="fg">
-              <label>Fulfillment *</label>
-              <div class="radio-row">
-                <label><input type="radio" name="fulfillment" value="pickup" checked> Pickup</label>
-                <label><input type="radio" name="fulfillment" value="delivery"> Delivery</label>
-              </div>
-            </div>
-
-            <div id="address-row" style="display:none">
-              <label for="f-address">Delivery address *</label>
-              <input id="f-address" name="address" type="text" autocomplete="street-address">
+            <div class="fg fg-full">
+              <label for="f-address">Venue / event location *</label>
+              <input id="f-address" name="address" type="text" autocomplete="street-address"
+                     placeholder="Hall, hotel, or home — where we set up and present">
             </div>
 
             <div class="fg fg-full">

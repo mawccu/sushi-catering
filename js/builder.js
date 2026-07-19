@@ -22,8 +22,8 @@
  *   #cater-progress        pieces-selected progress
  *   #cater-grid            roll cards render here
  *   #cater-addons          add-on rows render here
- *   #cart-lines/#cart-subtotal/#cart-deliveryfee/#cart-total/#cart-warning
- *   #booking-form (+ fields), #address-row, #booking-confirm, #form-errors
+ *   #cart-lines/#cart-total/#cart-warning
+ *   #booking-form (+ fields incl. #f-address venue), #booking-confirm, #form-errors
  *
  * PUBLIC (window): Builder.recalc(), Builder.getOrder()
  * ==========================================================================*/
@@ -37,10 +37,6 @@ window.Builder = (function () {
   function $(id) { return document.getElementById(id); }
   function money(n) { return window.formatMoney(n); }
   function perPiece(r) { return r.price / (r.pieces || 1); }
-  function getFulfillment() {
-    var r = document.querySelector('input[name="fulfillment"]:checked');
-    return r ? r.value : "pickup";
-  }
   function step() { return advanced ? 1 : 10; }
   function targetPieces() { return (guests || 0) * perGuest; }
   function sumPieces() { var s = 0; ROLLS.forEach(function (r) { s += pieces[r.id] || 0; }); return s; }
@@ -179,8 +175,7 @@ window.Builder = (function () {
       var lt = a.price * q; subtotal += lt;
       lines.push({ id: a.id, name: a.name, qty: q, qtyLabel: String(q), price: a.price, unit: a.unit, lineTotal: lt });
     });
-    var deliveryFee = (getFulfillment() === "delivery") ? window.SITE.deliveryFee : 0;
-    return { lines: lines, subtotal: subtotal, deliveryFee: deliveryFee, total: subtotal + deliveryFee, pieces: sumPieces() };
+    return { lines: lines, subtotal: subtotal, total: subtotal, pieces: sumPieces() };
   }
 
   function recalc() {
@@ -196,8 +191,6 @@ window.Builder = (function () {
           }).join("")
         : '<tr><td colspan="4">No items yet — pick your sushi above.</td></tr>';
     }
-    if ($("cart-subtotal")) $("cart-subtotal").textContent = money(c.subtotal);
-    if ($("cart-deliveryfee")) $("cart-deliveryfee").textContent = money(c.deliveryFee);
     if ($("cart-total")) $("cart-total").textContent = money(c.total);
     var warn = $("cart-warning");
     if (warn) {
@@ -227,7 +220,7 @@ window.Builder = (function () {
     }
     if (!data.guests || data.guests < 1) errs.push("Guest count must be at least 1.");
     else if (data.guests > 2000) errs.push("For 2000+ guests, please call us directly.");
-    if (data.fulfillment === "delivery" && !data.address) errs.push("Delivery address is required for delivery orders.");
+    if (!data.address) errs.push("Venue / event location is required.");
     if (!cartData.lines.length) errs.push("Please add at least one item to your order.");
     else if (cartData.subtotal < window.SITE.minOrder) errs.push("Order subtotal is below the " + money(window.SITE.minOrder) + " minimum.");
     return errs;
@@ -235,14 +228,6 @@ window.Builder = (function () {
 
   function bindForm() {
     var form = $("booking-form"); if (!form) return;
-    Array.prototype.forEach.call(document.querySelectorAll('input[name="fulfillment"]'), function (r) {
-      r.addEventListener("change", function () {
-        var row = $("address-row"); if (row) row.style.display = (getFulfillment() === "delivery") ? "" : "none";
-        recalc();
-      });
-    });
-    var addrRow = $("address-row");
-    if (addrRow) addrRow.style.display = (getFulfillment() === "delivery") ? "" : "none";
     var dateInput = form.querySelector('[name="eventDate"]');
     if (dateInput) { var min = todayStr(); min.setDate(min.getDate() + window.SITE.leadTimeDays); dateInput.min = min.toISOString().slice(0, 10); }
     // keep the two guest inputs in step
@@ -255,7 +240,7 @@ window.Builder = (function () {
       var data = {
         name: (fd.get("name") || "").trim(), email: (fd.get("email") || "").trim(), phone: (fd.get("phone") || "").trim(),
         eventDate: fd.get("eventDate") || "", guests: Number(fd.get("guests")) || guests || 0,
-        fulfillment: getFulfillment(), address: (fd.get("address") || "").trim(), notes: (fd.get("notes") || "").trim()
+        address: (fd.get("address") || "").trim(), notes: (fd.get("notes") || "").trim()
       };
       var cartData = computeCart();
       var errs = validate(data, cartData);
@@ -269,20 +254,19 @@ window.Builder = (function () {
       }
       if (errBox) { errBox.innerHTML = ""; errBox.style.display = "none"; }
       var record = window.Store.addRequest({
-        eventDate: data.eventDate, guests: data.guests, fulfillment: data.fulfillment, address: data.address,
+        eventDate: data.eventDate, guests: data.guests, address: data.address,
         name: data.name, email: data.email, phone: data.phone, notes: data.notes,
-        items: cartData.lines, subtotal: cartData.subtotal, deliveryFee: cartData.deliveryFee, total: cartData.total
+        items: cartData.lines, subtotal: cartData.subtotal, total: cartData.total
       });
       var confirm = $("booking-confirm");
       if (confirm) {
         confirm.innerHTML = "<h3>Thank you, " + escapeHtml(data.name) + "!</h3>" +
           "<p>Your quote request (<code>" + record.id + "</code>) is in for " + escapeHtml(data.eventDate) + ", " + data.guests + " guests — " +
           cartData.pieces + " pieces of sushi.</p>" +
-          "<p>Estimated total: <strong>" + money(cartData.total) + "</strong> (" + data.fulfillment + "). We'll confirm within one business day at " + escapeHtml(data.email) + ".</p>";
+          "<p>Estimated total: <strong>" + money(cartData.total) + "</strong>. We'll confirm availability and on-site setup within one business day at " + escapeHtml(data.email) + ".</p>";
         confirm.style.display = ""; confirm.scrollIntoView({ behavior: "smooth", block: "center" });
       }
       pieces = {}; addons = {}; form.reset(); syncGrid(); recalc();
-      var row = $("address-row"); if (row) row.style.display = (getFulfillment() === "delivery") ? "" : "none";
     });
   }
 

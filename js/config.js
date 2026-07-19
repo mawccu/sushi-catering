@@ -29,9 +29,9 @@ window.SITE = {
   phone: "+962 79 555 0182",
   email: "orders@sakurasushicatering.jo",
   serviceArea: "Greater Amman — within 30 km of Downtown Amman",
-  minOrder: 250,     // USD — minimum order subtotal to submit a quote
-  deliveryFee: 45,   // USD — flat fee when delivery (not pickup) is chosen
+  minOrder: 250,     // JOD — minimum order subtotal to submit a quote
   leadTimeDays: 3    // minimum days ahead an event must be booked
+  // On-site catering only — the team sets up and presents at the venue. No delivery/pickup.
 };
 
 // Per-person tiers: quote builder uses these ONLY for the package+guestcount

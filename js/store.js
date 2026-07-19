@@ -13,8 +13,7 @@
  *     // --- event details ---
  *     eventDate:  string    // "YYYY-MM-DD"
  *     guests:     number
- *     fulfillment:"delivery" | "pickup"
- *     address:    string    // required only when fulfillment==="delivery"
+ *     address:    string    // the venue / event location (on-site catering only)
  *     // --- contact ---
  *     name:       string
  *     email:      string
@@ -23,7 +22,6 @@
  *     // --- order snapshot (captured from quote builder at submit time) ---
  *     items:      { id, name, qty, price, unit, lineTotal }[]  // price = price AT submit
  *     subtotal:   number
- *     deliveryFee:number
  *     total:      number
  *   }
  *
