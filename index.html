@@ -307,26 +307,43 @@
     <section id="builder" class="sec">
       <div class="wrap">
         <div class="sec-head">
-          <div class="sec-index mono" data-reveal>(03) — 見積 Live Estimate</div>
-          <h2 class="sec-title"><span class="kl"><span>Build your quote.</span></span></h2>
-          <p class="sec-lede" data-reveal>Tell us your headcount for a smart recommendation,
-            or pick items directly. The total updates as you go.</p>
+          <div class="sec-index mono" data-reveal>(03) — 見積 Build Your Catering</div>
+          <h2 class="sec-title"><span class="kl"><span>Build your spread.</span></span></h2>
+          <p class="sec-lede" data-reveal>Tell us the headcount — we estimate the food and the cost.
+            Then pick your sushi by the ten, or fine-tune every piece.</p>
         </div>
 
-        <div class="recommend-box" data-reveal>
-          <div>
+        <!-- Step 1 — guests & appetite -->
+        <div class="cater-guests" data-reveal>
+          <div class="cg-field">
             <label for="guest-count">How many guests?</label>
             <input type="number" id="guest-count" min="1" step="1" placeholder="20">
           </div>
-          <button type="button" id="btn-recommend" class="btn magnetic">Recommend party trays</button>
-          <div id="recommend-out" aria-live="polite"></div>
+          <div class="cg-appetite" id="appetite" role="group" aria-label="How hungry — pieces per guest">
+            <span class="cg-lbl mono">Appetite</span>
+            <button type="button" class="apbtn" data-per="6" aria-pressed="false">Light <small>~6 pcs</small></button>
+            <button type="button" class="apbtn on" data-per="10" aria-pressed="true">Meal <small>~10 pcs</small></button>
+            <button type="button" class="apbtn" data-per="14" aria-pressed="false">Feast <small>~14 pcs</small></button>
+          </div>
+          <div class="cg-estimate" id="cater-estimate" aria-live="polite"></div>
         </div>
 
         <div class="builder-cols">
-          <div id="builder-list"><!-- rendered by builder.js --></div>
+          <div class="cater-build" data-reveal>
+            <div class="cater-toolbar">
+              <button type="button" id="cater-autofill" class="btn magnetic">Auto-fill a balanced spread</button>
+              <label class="adv-toggle"><input type="checkbox" id="adv-toggle"> <span>Customize each piece</span></label>
+            </div>
+            <div class="cater-progress" id="cater-progress" aria-live="polite"></div>
+            <div class="cater-grid" id="cater-grid"><!-- roll cards by builder.js --></div>
+            <details class="cater-extras">
+              <summary>Add sides &amp; extras</summary>
+              <div class="cater-addon-list" id="cater-addons"><!-- add-ons by builder.js --></div>
+            </details>
+          </div>
 
           <aside class="cart-panel" data-reveal>
-            <h3>Your Quote</h3>
+            <h3>Your spread</h3>
             <table>
               <thead><tr><th>Item</th><th>Price</th><th>Qty</th><th>Total</th></tr></thead>
               <tbody id="cart-lines"><tr><td colspan="4">No items selected yet.</td></tr></tbody>
