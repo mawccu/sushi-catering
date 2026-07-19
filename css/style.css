@@ -1202,41 +1202,42 @@ details[open] .faq-x::after { background: var(--shu); }
 .sm-eye { fill: var(--ink); }
 .sm-eye-socket { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-opacity: .6; }
 
-/* -- flesh fillets: peel apart when the section is skinned -- */
-.sm-fillet { transition: transform 1s cubic-bezier(.5,0,.12,1), opacity .9s ease; }
+/* -- flesh fillets: peel apart when the section is skinned (slow, deliberate) -- */
+.sm-fillet { transition: transform 2.1s cubic-bezier(.45,0,.15,1), opacity 1.7s ease; }
 .sm-skin-edge { fill: none; stroke: #D9A9B4; stroke-width: 3; stroke-opacity: .7; }
-.is-skinned .sm-fillet-top { transform: translateY(-46px) rotate(-1.2deg); opacity: 0; }
-.is-skinned .sm-fillet-bot { transform: translateY(46px) rotate(1.2deg); opacity: 0; }
+.is-skinned .sm-fillet-top { transform: translateY(-58px) rotate(-1.6deg); opacity: 0; }
+.is-skinned .sm-fillet-bot { transform: translateY(58px) rotate(1.6deg); opacity: 0; }
 
-/* -- selector dog-bones -- */
+/* -- selector bones: one organic hand-drawn bone each -- */
 .sm-pick { cursor: pointer; outline: none; }
-.sm-slat, .sm-knob { fill: var(--bone); stroke: var(--bone-edge); stroke-width: 1.6; transition: fill .3s, stroke .3s; }
-.sm-name { font-family: var(--serif); font-size: 21px; fill: var(--ink); letter-spacing: .01em; transition: fill .3s; }
-.sm-jp { font-family: var(--kanji); font-weight: 700; font-size: 19px; fill: var(--shu); transition: fill .3s; }
-.sm-count { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; fill: var(--ink-soft); transition: fill .3s; }
+.sm-bone-shape { fill: var(--bone); stroke: var(--bone-edge); stroke-width: 1.7; stroke-linejoin: round; transition: fill .3s, stroke .3s; }
+.sm-bone-ridge { fill: none; stroke: var(--bone-edge); stroke-width: 1.1; stroke-opacity: .6; transition: stroke .3s; }
+.sm-name { font-family: var(--serif); font-size: 20px; fill: var(--ink); transition: fill .3s; }
+.sm-jp { font-family: var(--kanji); font-weight: 700; font-size: 15px; fill: var(--ink); opacity: .72; transition: fill .3s, opacity .3s; }
+.sm-count { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; fill: var(--ink-soft); transition: fill .3s; }
 
-/* pop up from the spine after the flesh has peeled (staggered) */
+/* pop up from the spine after the (slow) skinning, staggered */
 .sm-pick {
-  transform: translateY(34px) scaleY(.34); transform-box: fill-box; transform-origin: 50% 100%;
-  opacity: 0; transition: transform .62s cubic-bezier(.34,1.56,.5,1), opacity .5s ease;
+  transform: translateY(30px) scaleY(.4); transform-box: fill-box; transform-origin: 50% 100%;
+  opacity: 0; transition: transform .7s cubic-bezier(.34,1.5,.5,1), opacity .5s ease;
 }
 .is-skinned .sm-pick { transform: none; opacity: 1; }
-.is-skinned .sm-pick.d0 { transition-delay: .60s; }
-.is-skinned .sm-pick.d1 { transition-delay: .70s; }
-.is-skinned .sm-pick.d2 { transition-delay: .80s; }
-.is-skinned .sm-pick.d3 { transition-delay: .90s; }
+.is-skinned .sm-pick.d0 { transition-delay: 1.45s; }
+.is-skinned .sm-pick.d1 { transition-delay: 1.58s; }
+.is-skinned .sm-pick.d2 { transition-delay: 1.71s; }
+.is-skinned .sm-pick.d3 { transition-delay: 1.84s; }
 
-/* lift + flush vermilion on hover / focus / selected */
-.sm-lift { transition: transform .32s cubic-bezier(.34,1.4,.5,1); }
+/* lift + ink vermilion on hover / focus / selected */
+.sm-lift { transition: transform .34s cubic-bezier(.34,1.4,.5,1); }
 .sm-pick:hover .sm-lift, .sm-pick.hover .sm-lift,
-.sm-pick:focus-visible .sm-lift, .sm-pick.on .sm-lift { transform: translateY(-16px); }
-.sm-pick:hover .sm-slat, .sm-pick.hover .sm-slat, .sm-pick:focus-visible .sm-slat, .sm-pick.on .sm-slat,
-.sm-pick:hover .sm-knob, .sm-pick.hover .sm-knob, .sm-pick:focus-visible .sm-knob, .sm-pick.on .sm-knob {
+.sm-pick:focus-visible .sm-lift, .sm-pick.on .sm-lift { transform: translateY(-18px); }
+.sm-pick:hover .sm-bone-shape, .sm-pick.hover .sm-bone-shape, .sm-pick:focus-visible .sm-bone-shape, .sm-pick.on .sm-bone-shape {
   fill: var(--shu); stroke: var(--shu);
 }
+.sm-pick:hover .sm-bone-ridge, .sm-pick.hover .sm-bone-ridge, .sm-pick:focus-visible .sm-bone-ridge, .sm-pick.on .sm-bone-ridge { stroke: rgba(242,237,226,.5); }
+.sm-pick:hover .sm-jp, .sm-pick.hover .sm-jp, .sm-pick:focus-visible .sm-jp, .sm-pick.on .sm-jp { fill: var(--paper); opacity: 1; }
 .sm-pick:hover .sm-name, .sm-pick.hover .sm-name, .sm-pick:focus-visible .sm-name, .sm-pick.on .sm-name,
-.sm-pick:hover .sm-jp, .sm-pick.hover .sm-jp, .sm-pick:focus-visible .sm-jp, .sm-pick.on .sm-jp { fill: var(--paper); }
-.sm-pick:hover .sm-count, .sm-pick.hover .sm-count, .sm-pick:focus-visible .sm-count, .sm-pick.on .sm-count { fill: rgba(242,237,226,.85); }
+.sm-pick:hover .sm-count, .sm-pick.hover .sm-count, .sm-pick:focus-visible .sm-count, .sm-pick.on .sm-count { fill: var(--shu); }
 
 /* legend — the accessible mirror control */
 .sm-legend {
@@ -1271,5 +1272,4 @@ details[open] .faq-x::after { background: var(--shu); }
 }
 @media (max-width: 720px) {
   .sm-legend { grid-template-columns: repeat(2, 1fr); }
-  .sm-name { font-size: 24px; }
 }

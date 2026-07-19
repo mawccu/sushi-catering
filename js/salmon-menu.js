@@ -26,11 +26,25 @@
   var SVGNS = "http://www.w3.org/2000/svg";
 
   var CUTS = [
-    { cat: "packages", jp: "頭", name: "Packages", label: "Catering Packages",     bx: 300 },
-    { cat: "platters", jp: "背", name: "Platters", label: "Party Trays & Platters", bx: 462 },
-    { cat: "rolls",    jp: "腹", name: "Rolls",    label: "À La Carte Rolls",       bx: 624 },
-    { cat: "addons",   jp: "尾", name: "Add-Ons",  label: "Sides & Add-Ons",        bx: 775 }
+    { cat: "packages", jp: "頭", name: "Packages", label: "Catering Packages",     bx: 300, lean: -3 },
+    { cat: "platters", jp: "背", name: "Platters", label: "Party Trays & Platters", bx: 462, lean: 2 },
+    { cat: "rolls",    jp: "腹", name: "Rolls",    label: "À La Carte Rolls",       bx: 624, lean: -2 },
+    { cat: "addons",   jp: "尾", name: "Add-Ons",  label: "Sides & Add-Ons",        bx: 775, lean: 3 }
   ];
+
+  // one organic bone: bulbous double-knuckle at each end, tapered curved shaft
+  function bonePath(bx, yTop, yBot, L) {
+    var k = 15;
+    return "M" + (bx - 5) + "," + (yTop + 20) +
+      " C" + (bx - k) + "," + (yTop + 12) + " " + (bx - k - 1) + "," + (yTop - 7) + " " + (bx - 5.5) + "," + (yTop - 4) +
+      " C" + (bx - 2.5) + "," + yTop + " " + (bx + 2.5) + "," + yTop + " " + (bx + 5.5) + "," + (yTop - 4) +
+      " C" + (bx + k + 1) + "," + (yTop - 7) + " " + (bx + k) + "," + (yTop + 12) + " " + (bx + 5) + "," + (yTop + 20) +
+      " C" + (bx + 7 + L) + "," + (yTop + 72) + " " + (bx + 7 + L) + "," + (yBot - 72) + " " + (bx + 5) + "," + (yBot - 20) +
+      " C" + (bx + k) + "," + (yBot - 12) + " " + (bx + k + 1) + "," + (yBot + 7) + " " + (bx + 5.5) + "," + (yBot + 4) +
+      " C" + (bx + 2.5) + "," + yBot + " " + (bx - 2.5) + "," + yBot + " " + (bx - 5.5) + "," + (yBot + 4) +
+      " C" + (bx - k - 1) + "," + (yBot + 7) + " " + (bx - k) + "," + (yBot - 12) + " " + (bx - 5) + "," + (yBot - 20) +
+      " C" + (bx - 7 + L) + "," + (yBot - 72) + " " + (bx - 7 + L) + "," + (yTop + 72) + " " + (bx - 5) + "," + (yTop + 20) + " Z";
+  }
 
   // body used only to clip the flesh fillets (head left, tail base right, no fin)
   var BODY = "M120,250 C150,176 262,150 392,150 C582,150 738,182 858,232 " +
@@ -126,20 +140,17 @@
       el("line", { x1: nx, y1: 246, x2: nx, y2: 196, "class": "sm-bone thin" }, sk);
     });
 
-    /* (2) selector dog-bones */
+    /* (2) selector bones — one organic bone per category */
     CUTS.forEach(function (c, i) {
       var g = el("g", { "class": "sm-pick d" + i, "data-cat": c.cat, role: "button", tabindex: "0", "aria-pressed": "false", "aria-label": c.label + ", " + counts[c.cat] + " items" }, svg);
       var lift = el("g", { "class": "sm-lift" }, g);
-      var bx = c.bx, top = 104, bot = 248, r = 18, w = 24;
-      el("rect", { x: bx - w / 2, y: top, width: w, height: bot - top, rx: w / 2, "class": "sm-slat" }, lift);
-      el("circle", { cx: bx, cy: top + 4, r: r, "class": "sm-knob" }, lift);
-      el("circle", { cx: bx, cy: bot - 4, r: r, "class": "sm-knob" }, lift);
-      el("text", { x: bx, y: top + 10, "text-anchor": "middle", "class": "sm-jp" }, lift).textContent = c.jp;
-      var mid = (top + bot) / 2;
-      var tn = el("text", { x: bx, y: mid, "text-anchor": "middle", "class": "sm-name", transform: "rotate(-90 " + bx + " " + mid + ")" }, lift);
-      tn.textContent = c.name;
-      el("text", { x: bx, y: bot - 1, "text-anchor": "middle", "class": "sm-count" }, lift).textContent = counts[c.cat];
-      el("rect", { x: bx - r - 2, y: top - r, width: (r + 2) * 2, height: (bot - top) + r * 2, fill: "transparent", "class": "sm-hit" }, g);
+      var bx = c.bx, yTop = 118, yBot = 250, L = c.lean || 0;
+      el("path", { d: bonePath(bx, yTop, yBot, L), "class": "sm-bone-shape" }, lift);
+      el("path", { d: "M" + (bx + L * 0.4) + "," + (yTop + 24) + " C" + (bx + L) + "," + (yTop + 70) + " " + (bx + L) + "," + (yBot - 70) + " " + (bx + L * 0.4) + "," + (yBot - 24), "class": "sm-bone-ridge" }, lift);
+      el("text", { x: bx, y: yTop + 9, "text-anchor": "middle", "class": "sm-jp" }, lift).textContent = c.jp;    // kanji on knuckle
+      el("text", { x: bx, y: 97, "text-anchor": "middle", "class": "sm-name" }, lift).textContent = c.name;      // name above
+      el("text", { x: bx, y: 79, "text-anchor": "middle", "class": "sm-count" }, lift).textContent = counts[c.cat] + " ITEMS";
+      el("rect", { x: bx - 20, y: yTop - 24, width: 40, height: (yBot - yTop) + 44, fill: "transparent", "class": "sm-hit" }, g);
       groupByCat[c.cat] = g;
       g.addEventListener("mouseenter", function () { hoverBone(c.cat, true); });
       g.addEventListener("mouseleave", function () { hoverBone(c.cat, false); });
