@@ -87,7 +87,7 @@
         '</div>' +
         '<div class="foot-grid">' +
           '<div><h4>Contact</h4>' +
-            '<p><a href="tel:+14155550182">' + window.SITE.phone + '</a><br>' +
+            '<p><a href="tel:+962795550182">' + window.SITE.phone + '</a><br>' +
             '<a href="mailto:' + window.SITE.email + '">' + window.SITE.email + '</a></p></div>' +
           '<div><h4>Service</h4><p>' + window.SITE.serviceArea + '<br>Minimum order ' +
             window.formatMoney(window.SITE.minOrder) + ' · ' + window.SITE.leadTimeDays + ' days’ lead time</p></div>' +
@@ -100,7 +100,7 @@
         '<div class="foot-legal">' +
           '<span>© ' + year + ' ' + window.SITE.name + '</span>' +
           '<span>Rolled at dawn · 朝に巻く</span>' +
-          '<span>SF · 37.7749° N, 122.4194° W</span>' +
+          '<span>Amman · 31.9539° N, 35.9106° E</span>' +
         '</div>';
     }
 

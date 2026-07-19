@@ -26,9 +26,9 @@
 window.SITE = {
   name: "Sakura Sushi Catering",
   tagline: "Fresh, hand-rolled sushi catering for events of every size.",
-  phone: "(415) 555-0182",
-  email: "orders@sakurasushicatering.example",
-  serviceArea: "San Francisco Bay Area — within 30 miles of downtown SF",
+  phone: "+962 79 555 0182",
+  email: "orders@sakurasushicatering.jo",
+  serviceArea: "Greater Amman — within 30 km of Downtown Amman",
   minOrder: 250,     // USD — minimum order subtotal to submit a quote
   deliveryFee: 45,   // USD — flat fee when delivery (not pickup) is chosen
   leadTimeDays: 3    // minimum days ahead an event must be booked

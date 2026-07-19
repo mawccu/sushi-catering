@@ -9,7 +9,7 @@
  *   getMenu()            -> deep-ish copy of MENU with overridden prices applied
  *   getMenuFlat()        -> flat array of all items (prices applied)
  *   getItem(id)          -> single item (price applied) or null
- *   formatMoney(n)       -> "$12.00"
+ *   formatMoney(n)       -> "JD 12.00"
  *   recommendPlatters(g) -> [{item, qty}] suggestion for g guests (see below)
  *   estimatePackage(pkgId, guests) -> { tier, pricePerPerson, total }
  * ==========================================================================*/
@@ -43,7 +43,7 @@
   };
 
   window.formatMoney = function (n) {
-    return "$" + (Math.round(Number(n) * 100) / 100).toFixed(2);
+    return "JD " + (Math.round(Number(n) * 100) / 100).toFixed(2);
   };
 
   // Recommend party trays for a guest count. Strategy: use the two flagship
