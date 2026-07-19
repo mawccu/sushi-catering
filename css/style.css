@@ -1117,6 +1117,19 @@ details[open] .faq-x::after { background: var(--shu); }
   -webkit-mask-image: radial-gradient(50% 50% at 50% 50%, #000 60%, transparent 100%);
   mask-image: radial-gradient(50% 50% at 50% 50%, #000 60%, transparent 100%);
 }
+/* The enlarged clip is nudged low, so its bottom edge bleeds off-screen and the
+   mask's fade-to-nothing lands below the fold — leaving the clip ~half-opaque
+   where the section cuts it, i.e. a faint horizontal "border" line at the bottom.
+   This paper wash sits ON TOP of the clip (after it in the DOM, below the z-index:1
+   captions) and dissolves that bottom band into the page. It starts transparent
+   through the sushi zone and only ramps to paper well below the rice, so the sushi
+   is untouched — it just erases the edge line. */
+.hero-blend .n3-pin::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 24%;
+  z-index: 0; pointer-events: none;
+  background: linear-gradient(180deg,
+    rgba(242,237,226,0) 0%, rgba(242,237,226,0) 42%, var(--paper) 100%);
+}
 .hero-blend .n3-head, .hero-blend .n3-stage { position: relative; z-index: 1; }
 .n3-fallback[hidden] { display: none; }
 .hero-blend .n3-fb-img {
