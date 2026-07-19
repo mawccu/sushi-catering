@@ -1305,3 +1305,30 @@ details[open] .faq-x::after { background: var(--shu); }
 @media (max-width: 720px) {
   .sm-legend { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* =========================================================================
+   INTERACTION POLISH
+   ========================================================================= */
+/* Anchor jumps clear the fixed header instead of tucking underneath it. */
+main section[id] { scroll-margin-top: clamp(72px, 9vh, 104px); }
+
+/* Tactile press feedback on tap/click for non-magnetic controls. */
+.apbtn, .cc-step button, .cater-extras summary, .sm-cut-btn, .sm-reset {
+  transition: transform .12s ease, background .25s, color .25s, border-color .25s;
+}
+.apbtn:active, .cc-step button:active, .cater-extras summary:active,
+.sm-cut-btn:active, .sm-reset:active { transform: scale(.95); }
+
+/* Order cards feel interactive: lift on hover, ring on focus/selection. */
+.cater-card:not(.has):hover { border-color: var(--line-strong); transform: translateY(-2px); }
+.cater-card:focus-within { border-color: var(--shu); }
+.cc-step:focus-within { border-color: var(--shu); box-shadow: 0 0 0 1px var(--shu); }
+.cater-addon { transition: border-color .25s; }
+.cater-addon:hover { border-bottom-color: var(--line-strong); }
+
+/* No grey flash when tapping controls on touch devices. */
+button, a, summary, .apbtn, .sm-pick, label { -webkit-tap-highlight-color: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  .apbtn:active, .cc-step button:active, .cater-card:not(.has):hover { transform: none; }
+}
