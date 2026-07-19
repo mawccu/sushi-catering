@@ -149,10 +149,10 @@ window.Builder = (function () {
     var sp = sumPieces(), tp = targetPieces();
     var pct = tp ? Math.min(100, Math.round(sp / tp * 100)) : (sp ? 100 : 0);
     var msg;
-    if (!sp) msg = guests ? "Pick your sushi below — or auto-fill a balanced spread." : "Selected: 0 pieces.";
+    if (!sp) msg = guests ? "Pick your sushi below, or auto-fill a balanced spread." : "Selected: 0 pieces.";
     else if (!tp) msg = "<b>" + sp + "</b> pieces selected.";
-    else if (sp < tp) msg = "<b>" + sp + "</b> of ~" + tp + " pieces — about <b>" + (tp - sp) + "</b> more to cover " + guests + " guests.";
-    else msg = "<b>" + sp + "</b> pieces — nicely covered for " + guests + " guests. ✓";
+    else if (sp < tp) msg = "<b>" + sp + "</b> of ~" + tp + " pieces, about <b>" + (tp - sp) + "</b> more to cover " + guests + " guests.";
+    else msg = "<b>" + sp + "</b> pieces, nicely covered for " + guests + " guests. ✓";
     box.innerHTML = '<div class="cp-bar"><i style="width:' + pct + '%"></i></div><div class="cp-msg">' + msg + '</div>';
     box.classList.toggle("is-covered", tp > 0 && sp >= tp);
   }
@@ -189,7 +189,7 @@ window.Builder = (function () {
             return '<tr><td>' + l.name + '</td><td>' + money(l.price) + '</td>' +
               '<td>' + l.qtyLabel + '</td><td>' + money(l.lineTotal) + '</td></tr>';
           }).join("")
-        : '<tr><td colspan="4">No items yet — pick your sushi above.</td></tr>';
+        : '<tr><td colspan="4">No items yet, pick your sushi above.</td></tr>';
     }
     if ($("cart-total")) $("cart-total").textContent = money(c.total);
     var warn = $("cart-warning");
@@ -261,7 +261,7 @@ window.Builder = (function () {
       var confirm = $("booking-confirm");
       if (confirm) {
         confirm.innerHTML = "<h3>Thank you, " + escapeHtml(data.name) + "!</h3>" +
-          "<p>Your quote request (<code>" + record.id + "</code>) is in for " + escapeHtml(data.eventDate) + ", " + data.guests + " guests — " +
+          "<p>Your quote request (<code>" + record.id + "</code>) is in for " + escapeHtml(data.eventDate) + ", " + data.guests + " guests · " +
           cartData.pieces + " pieces of sushi.</p>" +
           "<p>Estimated total: <strong>" + money(cartData.total) + "</strong>. We'll confirm availability and on-site setup within one business day at " + escapeHtml(data.email) + ".</p>";
         confirm.style.display = ""; confirm.scrollIntoView({ behavior: "smooth", block: "center" });

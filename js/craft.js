@@ -1,7 +1,7 @@
 /* ============================================================================
- * The Craft (js/craft.js) — scroll-driven ink drawings for craft.html
+ * The Craft (js/craft.js), scroll-driven ink drawings for craft.html
  * ----------------------------------------------------------------------------
- * Two pinned, scrub-linked scenes (GSAP ScrollTrigger, scrub — never autoplay):
+ * Two pinned, scrub-linked scenes (GSAP ScrollTrigger, scrub, never autoplay):
  *   Scene 01 #stage-nigiri : a salmon nigiri assembles layer by layer
  *                            (rice draws on -> wasabi -> salmon lands -> nori
  *                             wraps -> glaze/sesame/callouts/stamp).
@@ -13,8 +13,7 @@
  *  - The SVGs are authored in their FINAL, fully-assembled state. All initial
  *    "hidden" states are applied by gsap.set() at runtime. No JS / no GSAP =>
  *    both drawings render complete and the page still reads.
- *  - prefers-reduced-motion (or missing ScrollTrigger): no pinning, no scrub —
- *    static finished nigiri + a half-flesh/half-bone salmon with all labels.
+ *  - prefers-reduced-motion (or missing ScrollTrigger): no pinning, no scrub · *    static finished nigiri + a half-flesh/half-bone salmon with all labels.
  *  - Lazy init: procedural geometry + timelines are only built when a stage
  *    approaches the viewport (IntersectionObserver, generous rootMargin).
  * ==========================================================================*/
@@ -149,7 +148,7 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * Scene 01 — nigiri assembly
+   * Scene 01, nigiri assembly
    * ------------------------------------------------------------------ */
   function buildNigiri(stage) {
     genGrains();
@@ -183,7 +182,7 @@
     var onUp = wireProgress(stage, tl.scrollTrigger);
     tl.eventCallback("onUpdate", onUp);
 
-    /* 01 — shari */
+    /* 01, shari */
     tl.to("#n-grid line", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0)
       .to("#n-grid path", { autoAlpha: 0.55, duration: 0.4 }, 0.2)
       .to(riceDraw, { strokeDashoffset: 0, duration: 1.0, ease: "power1.inOut" }, 0.15)
@@ -193,13 +192,13 @@
         stagger: { each: 0.008, from: "random" }
       }, 0.7);
 
-    /* 02 — wasabi */
+    /* 02, wasabi */
     tl.to(wasabiDraw, { strokeDashoffset: 0, duration: 0.45, ease: "power1.inOut" }, 1.95)
       .to("#wasabi-body", { fillOpacity: 1, duration: 0.3 }, 2.3)
       .to("#co-wasabi", { autoAlpha: 1, y: 0, duration: 0.3 }, 2.45)
       .to("#co-wasabi", { autoAlpha: 0, duration: 0.25 }, 3.15);
 
-    /* 03 — the salmon lands */
+    /* 03, the salmon lands */
     tl.to("#n-salmon", { y: 0, duration: 1.15, ease: "power2.in" }, 3.45)
       .to(salmonDraw, { strokeDashoffset: 0, duration: 0.9, ease: "power1.inOut" }, 3.45)
       .to("#salmon-body", { fillOpacity: 1, duration: 0.6 }, 3.8)
@@ -207,10 +206,10 @@
       .to("#n-rice", { scaleY: 1, duration: 0.3, ease: "power2.out" }, 4.75)
       .to(striae, { strokeDashoffset: 0, duration: 0.55, stagger: 0.1, ease: "power1.inOut" }, 4.75);
 
-    /* 04 — nori wraps */
+    /* 04, nori wraps */
     tl.to("#nori-clip-rect", { attr: { height: 200 }, duration: 1.25, ease: "power1.inOut" }, 5.85);
 
-    /* 05 — finish */
+    /* 05, finish */
     tl.to(glaze, { strokeDashoffset: 0, duration: 0.6, ease: "power1.inOut" }, 7.25)
       .to("#n-seeds ellipse", { autoAlpha: 1, y: 0, duration: 0.35, stagger: 0.09, ease: "power2.in" }, 7.5)
       .to(["#co-shari", "#co-neta", "#co-nori", "#co-dim"],
@@ -223,7 +222,7 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * Scene 02 — salmon anatomy scan
+   * Scene 02, salmon anatomy scan
    * ------------------------------------------------------------------ */
   var scanState = { x: 62 };
   function applyScan(x) {
@@ -280,7 +279,7 @@
    * ------------------------------------------------------------------ */
   function staticFallback() {
     genGrains(); genScales(); genBones();
-    applyScan(520); // half flesh, half bone — the idea reads at a glance
+    applyScan(520); // half flesh, half bone, the idea reads at a glance
     document.querySelectorAll(".craft-stage").forEach(function (s) {
       s.classList.add("stage-static");
     });
@@ -290,7 +289,7 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * Init — lazy, near-viewport
+   * Init, lazy, near-viewport
    * ------------------------------------------------------------------ */
   function init() {
     var nigiri = document.getElementById("stage-nigiri");

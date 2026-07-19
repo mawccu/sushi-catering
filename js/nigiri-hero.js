@@ -4,8 +4,8 @@
  * The #nigiri3d hero: a cinematic sushi film scrubbed by scroll. The section is
  * tall (see CSS height:340vh) with a position:sticky pin, so the video holds
  * still while you scroll through the section. Progress is read every frame
- * straight from the section's getBoundingClientRect — NO ScrollTrigger, no GSAP
- * pin — which is the most reliable way to tie playback to scroll. currentTime is
+ * straight from the section's getBoundingClientRect · NO ScrollTrigger, no GSAP
+ * pin, which is the most reliable way to tie playback to scroll. currentTime is
  * eased toward the target for a smooth scrub; the MP4 is all-keyframe so seeking
  * is frame-accurate.
  *
@@ -49,9 +49,9 @@
     window.addEventListener("keydown", prime, { once: true });
 
     var CAPS = [
-      ["鮨 — 01", "Three parts, apart."],
-      ["鮨 — 02", "Coming together."],
-      ["鮨 — 03", "One perfect bite."]
+      ["鮨 · 01", "Three parts, apart."],
+      ["鮨 · 02", "Coming together."],
+      ["鮨 · 03", "One perfect bite."]
     ];
     var stepEl = sec.querySelector("#n3-caption .n3-step");
     var lineEl = sec.querySelector("#n3-caption .n3-line");
@@ -106,8 +106,7 @@
         var want = clamp(cur, 0, duration - 0.001);
         // The clip is all-intra at a modest frame rate, so seeking to a time
         // inside the frame already shown just re-decodes the same picture and
-        // stutters. Only issue a new seek once we've moved ~half a frame away —
-        // far fewer decodes, much smoother scrub.
+        // stutters. Only issue a new seek once we've moved ~half a frame away · // far fewer decodes, much smoother scrub.
         if (lastSet < 0 || Math.abs(want - lastSet) >= 0.028) {
           try { video.currentTime = want; lastSet = want; } catch (e) {}
         }

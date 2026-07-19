@@ -1,5 +1,5 @@
 /* ============================================================================
- * Motion system (js/polish.js) — "Washi & Ink"
+ * Motion system (js/polish.js) · "Washi & Ink"
  * ----------------------------------------------------------------------------
  * Lenis smooth scroll + GSAP/ScrollTrigger choreography + custom cursor +
  * magnetic buttons + live-total pulse.

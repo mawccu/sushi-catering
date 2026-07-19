@@ -1,5 +1,5 @@
 /* ============================================================================
- * Store — localStorage persistence layer (js/store.js)
+ * Store, localStorage persistence layer (js/store.js)
  * ----------------------------------------------------------------------------
  * All persisted state for the site lives here. No backend (static site).
  *
@@ -8,7 +8,7 @@
  * Store.KEYS.REQUESTS -> "sakura_requests" : Request[]
  *   Request = {
  *     id:         string    // "req-" + timestamp, unique
- *     createdAt:  number     // Date.now() ms — used for reverse-chron sort
+ *     createdAt:  number     // Date.now() ms, used for reverse-chron sort
  *     status:     "new" | "confirmed"   // owner toggles in admin
  *     // --- event details ---
  *     eventDate:  string    // "YYYY-MM-DD"

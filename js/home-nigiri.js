@@ -1,5 +1,5 @@
 /* ============================================================================
- * Home nigiri (js/home-nigiri.js) — a lighter scroll-built sushi moment
+ * Home nigiri (js/home-nigiri.js), a lighter scroll-built sushi moment
  * ----------------------------------------------------------------------------
  * A single pinned, scrub-linked scene on the homepage: one salmon nigiri
  * assembles as you scroll (rice draws on -> grains -> the salmon slice lands ->
@@ -11,7 +11,7 @@
  * follows the same resilience contract:
  *  - The SVG is authored in its FINAL assembled state. All "hidden" starts are
  *    applied by gsap.set() at runtime. No JS / no GSAP => finished nigiri + CTA.
- *  - prefers-reduced-motion (or no ScrollTrigger): no pin, no scrub — a static
+ *  - prefers-reduced-motion (or no ScrollTrigger): no pin, no scrub, a static
  *    finished nigiri with the last caption and the CTA showing.
  *  - Lazy init: geometry + timeline are only built as the stage nears view.
  * ==========================================================================*/
@@ -109,14 +109,14 @@
     });
     tl.eventCallback("onUpdate", wireProgress(stage, tl.scrollTrigger));
 
-    /* 01 — shari (rice) */
+    /* 01, shari (rice) */
     tl.to("#hn-grid line", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0)
       .to("#hn-grid path", { autoAlpha: 0.55, duration: 0.4 }, 0.2)
       .to(riceDraw, { strokeDashoffset: 0, duration: 1.0, ease: "power1.inOut" }, 0.15)
       .to("#hn-rice-body", { fillOpacity: 1, duration: 0.5 }, 0.85)
       .to("#hn-grains path", { autoAlpha: 1, duration: 0.25, stagger: { each: 0.008, from: "random" } }, 0.7);
 
-    /* 02 — neta (the salmon lands) */
+    /* 02, neta (the salmon lands) */
     tl.to("#hn-salmon", { y: 0, duration: 1.15, ease: "power2.in" }, 2.2)
       .to(salmonDraw, { strokeDashoffset: 0, duration: 0.9, ease: "power1.inOut" }, 2.2)
       .to("#hn-salmon-body", { fillOpacity: 1, duration: 0.6, ease: "none" }, 2.55)
@@ -124,7 +124,7 @@
       .to("#hn-rice", { scaleY: 1, duration: 0.3, ease: "power2.out" }, 3.5)
       .to(striae, { strokeDashoffset: 0, duration: 0.55, stagger: 0.1, ease: "power1.inOut" }, 3.5);
 
-    /* 03 — finish (nori wrap, glaze, sesame, stamp, CTA) */
+    /* 03, finish (nori wrap, glaze, sesame, stamp, CTA) */
     tl.to("#hn-nori-clip-rect", { attr: { height: 200 }, duration: 1.05, ease: "power1.inOut" }, 4.5)
       .to(glaze, { strokeDashoffset: 0, duration: 0.6, ease: "power1.inOut" }, 5.55)
       .to("#hn-seeds ellipse", { autoAlpha: 1, y: 0, duration: 0.35, stagger: 0.09, ease: "power2.in" }, 5.8)

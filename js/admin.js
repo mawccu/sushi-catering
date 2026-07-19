@@ -1,10 +1,10 @@
 /* ============================================================================
- * Admin controller (js/admin.js) — powers admin.html
+ * Admin controller (js/admin.js), powers admin.html
  * ----------------------------------------------------------------------------
  * Two panels:
- *  1) Requests list  — reverse-chronological Store.getRequests(); shows detail
+ *  1) Requests list, reverse-chronological Store.getRequests(); shows detail
  *     + total; toggle status new<->confirmed; delete.
- *  2) Price editor    — edit any menu item's price; persists to
+ *  2) Price editor, edit any menu item's price; persists to
  *     Store.setPriceOverride(id, price); reset restores config.js defaults.
  *
  * DOM IDS expected in admin.html:
@@ -42,7 +42,7 @@
       }).join("");
       var when = new Date(r.createdAt).toLocaleString();
       return '<article class="req-card" data-status="' + r.status + '">' +
-        '<h3>' + esc(r.name) + ' — ' + window.formatMoney(r.total) +
+        '<h3>' + esc(r.name) + ' · ' + window.formatMoney(r.total) +
         ' <span class="req-status">' + r.status + '</span></h3>' +
         '<p class="req-meta"><code>' + r.id + '</code> · submitted ' + esc(when) + '</p>' +
         '<p>Event: <strong>' + esc(r.eventDate) + '</strong> · ' + r.guests + ' guests' +

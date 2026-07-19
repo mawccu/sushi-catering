@@ -2,12 +2,12 @@
  * Salmon skeleton menu selector (js/salmon-menu.js)
  * ----------------------------------------------------------------------------
  * The fish IS the menu. When the section scrolls into view the salmon is
- * "skinned" — its flesh splits into two fillets that peel apart — revealing the
+ * "skinned", its flesh splits into two fillets that peel apart, revealing the
  * skeleton. Four bones then pop up from the spine, one per menu category, each
  * labelled (kanji on the knob, category name written up the shaft, item count on
  * the base). Hover a bone to lift it and flush it vermilion; click to filter
- * #menu-display to that category and scroll to it. Click again — or "Whole fish"
- * — to restore everything.
+ * #menu-display to that category and scroll to it. Click again, or "Whole fish"
+ *, to restore everything.
  *
  *   頭 Packages   背 Platters   腹 Rolls   尾 Add-Ons
  *
@@ -17,7 +17,7 @@
  *    functions; legend hover lifts the matching bone.
  *  - If this script never runs, #menu-display still renders every category in
  *    full (menu-display.js is independent). Nothing here is required to see the
- *    menu — it only adds a way to filter it.
+ *    menu, it only adds a way to filter it.
  * ==========================================================================*/
 (function () {
   "use strict";
@@ -119,7 +119,7 @@
     var clip = el("clipPath", { id: "smBodyClip" }, defs);
     el("path", { d: BODY }, clip);
 
-    /* (1) skeleton — spine, skull, tail, and the whole ribcage */
+    /* (1) skeleton, spine, skull, tail, and the whole ribcage */
     var sk = el("g", { "class": "sm-skel" }, svg);
     el("path", { d: "M182,250 C400,245 650,247 856,250", "class": "sm-spine" }, sk);
     // skull + eye + gill arch
@@ -141,7 +141,7 @@
       el("line", { x1: 856, y1: 250, x2: t[0], y2: t[1], "class": "sm-rib tail" }, sk);
     });
 
-    /* (2) the 4 raised selector ribs — same rib, bolder + lifted above the rest */
+    /* (2) the 4 raised selector ribs, same rib, bolder + lifted above the rest */
     CUTS.forEach(function (c, i) {
       // its ventral (down) rib stays part of the cage
       el("path", { d: ribPath(c.bx, 254, bodyH(c.bx), -1), "class": "sm-rib", "clip-path": "url(#smBodyClip)" }, sk);
@@ -200,12 +200,12 @@
     reset.id = "sm-reset";
     reset.className = "sm-reset mono";
     reset.hidden = true;
-    reset.textContent = "↩ Whole fish — show everything";
+    reset.textContent = "↩ Whole fish, show everything";
     reset.addEventListener("click", function () { select(active); });
     host.appendChild(reset);
   }
 
-  // Reveal (skin the fish) when the section scrolls into view — once.
+  // Reveal (skin the fish) when the section scrolls into view, once.
   function armReveal() {
     var wrap = document.getElementById("salmon-menu");
     var canvas = document.getElementById("sm-canvas");

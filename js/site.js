@@ -1,5 +1,5 @@
 /* ============================================================================
- * Shared site chrome (js/site.js) — "Washi & Ink" edition
+ * Shared site chrome (js/site.js) · "Washi & Ink" edition
  * ----------------------------------------------------------------------------
  * Injects nav + overlay menu + footer into pages that have
  *   <header id="site-header"></header> and <footer id="site-footer"></footer>
@@ -82,7 +82,7 @@
       var year = new Date().getFullYear();
       footer.innerHTML =
         '<div class="foot-cta">' +
-          '<span class="mono">予約 — Reserve your date</span>' +
+          '<span class="mono">予約 · Reserve your date</span>' +
           '<a class="foot-cta-link" href="index.html#builder">Planning something <span class="it">worth remembering?</span> <span class="arr">→</span></a>' +
         '</div>' +
         '<div class="foot-grid">' +

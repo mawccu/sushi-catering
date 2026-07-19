@@ -1,8 +1,8 @@
 /* ============================================================================
- * Sakura Sushi Catering — Core Data Model (config.js)
+ * Sakura Sushi Catering · Core Data Model (config.js)
  * ----------------------------------------------------------------------------
  * SINGLE SOURCE OF TRUTH for all business data. Fully static (no backend).
- * A later "polish" pass will restyle the UI — DO NOT rename the exported
+ * A later "polish" pass will restyle the UI · DO NOT rename the exported
  * globals, item IDs, or function names below; the quote builder, booking form,
  * and admin page all depend on them.
  *
@@ -28,10 +28,10 @@ window.SITE = {
   tagline: "Fresh, hand-rolled sushi catering for events of every size.",
   phone: "+962 79 555 0182",
   email: "orders@sakurasushicatering.jo",
-  serviceArea: "Greater Amman — within 30 km of Downtown Amman",
-  minOrder: 250,     // JOD — minimum order subtotal to submit a quote
+  serviceArea: "Greater Amman, within 30 km of Downtown Amman",
+  minOrder: 100,     // JOD, minimum order subtotal to submit a quote
   leadTimeDays: 3    // minimum days ahead an event must be booked
-  // On-site catering only — the team sets up and presents at the venue. No delivery/pickup.
+  // On-site catering only, the team sets up and presents at the venue. No delivery/pickup.
 };
 
 // Per-person tiers: quote builder uses these ONLY for the package+guestcount
@@ -44,7 +44,7 @@ window.PRICING_TIERS = [
 ];
 
 window.MENU = {
-  // PACKAGES — priced PER PERSON. serves:1 so recommender treats qty as headcount.
+  // PACKAGES, priced PER PERSON. serves:1 so recommender treats qty as headcount.
   packages: [
     { id: "pkg-omakase", name: "Omakase Feast", category: "packages", unit: "per person", serves: 1, pieces: 0,
       price: 32, tags: ["raw","cooked"],
@@ -54,9 +54,9 @@ window.MENU = {
       desc: "A crowd-pleasing mix of California, spicy tuna, and shrimp tempura rolls with edamame." },
     { id: "pkg-garden", name: "Garden Vegetarian", category: "packages", unit: "per person", serves: 1, pieces: 0,
       price: 20, tags: ["vegetarian","vegan"],
-      desc: "All-veggie rolls — avocado, cucumber, sweet potato tempura, and inari — plus miso soup." }
+      desc: "All-veggie rolls, avocado, cucumber, sweet potato tempura, and inari, plus miso soup." }
   ],
-  // PLATTERS / PARTY TRAYS — flat price each, serves several.
+  // PLATTERS / PARTY TRAYS, flat price each, serves several.
   platters: [
     { id: "plt-rainbow", name: "Rainbow Party Tray", category: "platters", unit: "tray", serves: 8, pieces: 64,
       price: 95, tags: ["raw","cooked"],
@@ -69,9 +69,9 @@ window.MENU = {
       desc: "60 slices of the day's freshest fish, artfully arranged on a wooden boat." },
     { id: "plt-veggie", name: "Garden Veggie Tray", category: "platters", unit: "tray", serves: 8, pieces: 64,
       price: 78, tags: ["vegetarian","vegan"],
-      desc: "64 pieces of colorful vegetable maki — no fish, all flavor." }
+      desc: "64 pieces of colorful vegetable maki, no fish, all flavor." }
   ],
-  // A LA CARTE ROLLS — flat price each, one roll (8 pcs) serves ~2.
+  // A LA CARTE ROLLS, flat price each, one roll (8 pcs) serves ~2.
   rolls: [
     { id: "roll-california", name: "California Roll", category: "rolls", unit: "each", serves: 2, pieces: 8,
       price: 8, tags: ["cooked"], desc: "Crab, avocado, cucumber. The timeless classic." },
@@ -86,7 +86,7 @@ window.MENU = {
     { id: "roll-rainbow", name: "Rainbow Roll", category: "rolls", unit: "each", serves: 2, pieces: 8,
       price: 13, tags: ["raw"], desc: "California roll draped in assorted sashimi." }
   ],
-  // ADD-ONS — flat price each.
+  // ADD-ONS, flat price each.
   addons: [
     { id: "add-edamame", name: "Edamame (large)", category: "addons", unit: "each", serves: 6, pieces: 0,
       price: 18, tags: ["vegan","gluten-free"], desc: "Steamed and lightly salted soybeans." },
@@ -99,7 +99,7 @@ window.MENU = {
   ]
 };
 
-// Flat list of every menu item across categories — convenience for lookups.
+// Flat list of every menu item across categories, convenience for lookups.
 window.MENU_FLAT = [].concat(
   window.MENU.packages, window.MENU.platters, window.MENU.rolls, window.MENU.addons
 );
