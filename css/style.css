@@ -88,8 +88,10 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.02; let
 
 .wrap { max-width: 1360px; margin: 0 auto; padding-inline: var(--pad-x); }
 
-/* Kinetic line wrappers — JS animates .kl > span from below */
-.kl { display: block; overflow: hidden; }
+/* Kinetic line wrappers — JS animates .kl > span from below.
+   padding-bottom extends the reveal mask so italic descenders (e.g. the "y" in
+   "ceremony") aren't clipped; the equal negative margin keeps layout unchanged. */
+.kl { display: block; overflow: hidden; padding-bottom: .2em; margin-bottom: -.2em; }
 .kl > span { display: inline-block; will-change: transform; }
 
 /* =========================================================================
