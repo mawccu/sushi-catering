@@ -1195,10 +1195,12 @@ details[open] .faq-x::after { background: var(--shu); }
 .sm-canvas { max-width: 1000px; margin: 0 auto; }
 .sm-svg { width: 100%; height: auto; display: block; overflow: visible; }
 
-/* -- skeleton -- */
-.sm-bone { stroke: var(--ink); fill: none; stroke-linecap: round; stroke-width: 1.7; stroke-opacity: .62; }
-.sm-bone.thin { stroke-width: 1.05; stroke-opacity: .42; }
-.sm-spine { stroke: var(--ink); fill: none; stroke-width: 2.4; stroke-opacity: .7; stroke-linecap: round; }
+/* -- skeleton — everything is a rib -- */
+.sm-rib { stroke: var(--ink); fill: none; stroke-linecap: round; stroke-width: 1.6; stroke-opacity: .42; }
+.sm-rib.skull { stroke-opacity: .6; stroke-width: 1.8; }
+.sm-rib.tail { stroke-opacity: .6; stroke-width: 1.7; }
+.sm-vert { stroke: var(--ink); fill: none; stroke-width: 1.5; stroke-opacity: .5; stroke-linecap: round; }
+.sm-spine { stroke: var(--ink); fill: none; stroke-width: 2.4; stroke-opacity: .72; stroke-linecap: round; }
 .sm-eye { fill: var(--ink); }
 .sm-eye-socket { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-opacity: .6; }
 
@@ -1208,33 +1210,33 @@ details[open] .faq-x::after { background: var(--shu); }
 .is-skinned .sm-fillet-top { transform: translateY(-58px) rotate(-1.6deg); opacity: 0; }
 .is-skinned .sm-fillet-bot { transform: translateY(58px) rotate(1.6deg); opacity: 0; }
 
-/* -- selector bones: one organic hand-drawn bone each -- */
+/* -- the 4 raised selector ribs: same rib shape, bolder + lifted above the rest -- */
 .sm-pick { cursor: pointer; outline: none; }
-.sm-bone-shape { fill: var(--bone); stroke: var(--bone-edge); stroke-width: 1.7; stroke-linejoin: round; transition: fill .3s, stroke .3s; }
-.sm-bone-ridge { fill: none; stroke: var(--bone-edge); stroke-width: 1.1; stroke-opacity: .6; transition: stroke .3s; }
+.sm-pick-out { stroke: var(--ink); fill: none; stroke-linecap: round; stroke-width: 7.5; stroke-opacity: .85; transition: stroke .3s, stroke-opacity .3s; }
+.sm-pick-fill { stroke: var(--bone); fill: none; stroke-linecap: round; stroke-width: 5; transition: stroke .3s; }
+.sm-pick-knob { fill: var(--bone); stroke: var(--ink); stroke-width: 1.6; transition: fill .3s, stroke .3s; }
 .sm-name { font-family: var(--serif); font-size: 20px; fill: var(--ink); transition: fill .3s; }
-.sm-jp { font-family: var(--kanji); font-weight: 700; font-size: 15px; fill: var(--ink); opacity: .72; transition: fill .3s, opacity .3s; }
+.sm-jp { font-family: var(--kanji); font-weight: 700; font-size: 15px; fill: var(--ink); opacity: .75; transition: fill .3s, opacity .3s; }
 .sm-count { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; fill: var(--ink-soft); transition: fill .3s; }
 
-/* pop up from the spine after the (slow) skinning, staggered */
+/* pop up slightly above the other ribs after the (slow) skinning, staggered */
 .sm-pick {
-  transform: translateY(30px) scaleY(.4); transform-box: fill-box; transform-origin: 50% 100%;
-  opacity: 0; transition: transform .7s cubic-bezier(.34,1.5,.5,1), opacity .5s ease;
+  transform: translateY(26px); transform-box: fill-box; transform-origin: 50% 100%;
+  opacity: 0; transition: transform .8s cubic-bezier(.34,1.5,.5,1), opacity .5s ease;
 }
 .is-skinned .sm-pick { transform: none; opacity: 1; }
-.is-skinned .sm-pick.d0 { transition-delay: 1.45s; }
-.is-skinned .sm-pick.d1 { transition-delay: 1.58s; }
-.is-skinned .sm-pick.d2 { transition-delay: 1.71s; }
-.is-skinned .sm-pick.d3 { transition-delay: 1.84s; }
+.is-skinned .sm-pick.d0 { transition-delay: 1.50s; }
+.is-skinned .sm-pick.d1 { transition-delay: 1.63s; }
+.is-skinned .sm-pick.d2 { transition-delay: 1.76s; }
+.is-skinned .sm-pick.d3 { transition-delay: 1.89s; }
 
-/* lift + ink vermilion on hover / focus / selected */
+/* hover / focus / selected: rise a touch more + ink the rib vermilion */
 .sm-lift { transition: transform .34s cubic-bezier(.34,1.4,.5,1); }
 .sm-pick:hover .sm-lift, .sm-pick.hover .sm-lift,
-.sm-pick:focus-visible .sm-lift, .sm-pick.on .sm-lift { transform: translateY(-18px); }
-.sm-pick:hover .sm-bone-shape, .sm-pick.hover .sm-bone-shape, .sm-pick:focus-visible .sm-bone-shape, .sm-pick.on .sm-bone-shape {
-  fill: var(--shu); stroke: var(--shu);
-}
-.sm-pick:hover .sm-bone-ridge, .sm-pick.hover .sm-bone-ridge, .sm-pick:focus-visible .sm-bone-ridge, .sm-pick.on .sm-bone-ridge { stroke: rgba(242,237,226,.5); }
+.sm-pick:focus-visible .sm-lift, .sm-pick.on .sm-lift { transform: translateY(-14px); }
+.sm-pick:hover .sm-pick-out, .sm-pick.hover .sm-pick-out, .sm-pick:focus-visible .sm-pick-out, .sm-pick.on .sm-pick-out { stroke: var(--shu); stroke-opacity: 1; }
+.sm-pick:hover .sm-pick-fill, .sm-pick.hover .sm-pick-fill, .sm-pick:focus-visible .sm-pick-fill, .sm-pick.on .sm-pick-fill { stroke: var(--shu); }
+.sm-pick:hover .sm-pick-knob, .sm-pick.hover .sm-pick-knob, .sm-pick:focus-visible .sm-pick-knob, .sm-pick.on .sm-pick-knob { fill: var(--shu); stroke: var(--shu); }
 .sm-pick:hover .sm-jp, .sm-pick.hover .sm-jp, .sm-pick:focus-visible .sm-jp, .sm-pick.on .sm-jp { fill: var(--paper); opacity: 1; }
 .sm-pick:hover .sm-name, .sm-pick.hover .sm-name, .sm-pick:focus-visible .sm-name, .sm-pick.on .sm-name,
 .sm-pick:hover .sm-count, .sm-pick.hover .sm-count, .sm-pick:focus-visible .sm-count, .sm-pick.on .sm-count { fill: var(--shu); }

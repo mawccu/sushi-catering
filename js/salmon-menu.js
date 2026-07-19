@@ -26,24 +26,27 @@
   var SVGNS = "http://www.w3.org/2000/svg";
 
   var CUTS = [
-    { cat: "packages", jp: "頭", name: "Packages", label: "Catering Packages",     bx: 300, lean: -3 },
-    { cat: "platters", jp: "背", name: "Platters", label: "Party Trays & Platters", bx: 462, lean: 2 },
-    { cat: "rolls",    jp: "腹", name: "Rolls",    label: "À La Carte Rolls",       bx: 624, lean: -2 },
-    { cat: "addons",   jp: "尾", name: "Add-Ons",  label: "Sides & Add-Ons",        bx: 775, lean: 3 }
+    { cat: "packages", jp: "頭", name: "Packages", label: "Catering Packages",     bx: 300 },
+    { cat: "platters", jp: "背", name: "Platters", label: "Party Trays & Platters", bx: 460 },
+    { cat: "rolls",    jp: "腹", name: "Rolls",    label: "À La Carte Rolls",       bx: 620 },
+    { cat: "addons",   jp: "尾", name: "Add-Ons",  label: "Sides & Add-Ons",        bx: 772 }
   ];
 
-  // one organic bone: bulbous double-knuckle at each end, tapered curved shaft
-  function bonePath(bx, yTop, yBot, L) {
-    var k = 15;
-    return "M" + (bx - 5) + "," + (yTop + 20) +
-      " C" + (bx - k) + "," + (yTop + 12) + " " + (bx - k - 1) + "," + (yTop - 7) + " " + (bx - 5.5) + "," + (yTop - 4) +
-      " C" + (bx - 2.5) + "," + yTop + " " + (bx + 2.5) + "," + yTop + " " + (bx + 5.5) + "," + (yTop - 4) +
-      " C" + (bx + k + 1) + "," + (yTop - 7) + " " + (bx + k) + "," + (yTop + 12) + " " + (bx + 5) + "," + (yTop + 20) +
-      " C" + (bx + 7 + L) + "," + (yTop + 72) + " " + (bx + 7 + L) + "," + (yBot - 72) + " " + (bx + 5) + "," + (yBot - 20) +
-      " C" + (bx + k) + "," + (yBot - 12) + " " + (bx + k + 1) + "," + (yBot + 7) + " " + (bx + 5.5) + "," + (yBot + 4) +
-      " C" + (bx + 2.5) + "," + yBot + " " + (bx - 2.5) + "," + yBot + " " + (bx - 5.5) + "," + (yBot + 4) +
-      " C" + (bx - k - 1) + "," + (yBot + 7) + " " + (bx - k) + "," + (yBot - 12) + " " + (bx - 5) + "," + (yBot - 20) +
-      " C" + (bx - 7 + L) + "," + (yBot - 72) + " " + (bx - 7 + L) + "," + (yTop + 72) + " " + (bx - 5) + "," + (yTop + 20) + " Z";
+  // body half-height profile -> how long a rib is at position x
+  function bodyH(x) { var t = (x - 505) / 338; return Math.max(12, 94 * Math.sqrt(Math.max(0, 1 - t * t))); }
+  // a rib: gentle curve from the spine to its tip, bowing toward the tail
+  // dir = +1 (dorsal / up) or -1 (ventral / down)
+  function ribPath(x, base, H, dir) {
+    var dx = H * 0.17, tx = x + dx, ty = base - dir * H;
+    return "M" + x + "," + base +
+      " C" + (x + dx * 0.4 + 3) + "," + (base - dir * H * 0.42) +
+      " " + (tx - 1) + "," + (base - dir * H * 0.78) + " " + tx + "," + ty;
+  }
+  // the bolder, taller, raised selector rib (returns path + tip)
+  function pickRib(x, base) {
+    var H = 134, dx = H * 0.08, tx = x + dx, ty = base - H;
+    return { d: "M" + x + "," + base + " C" + (x + dx * 0.5 + 3) + "," + (base - H * 0.42) +
+      " " + (tx - 1) + "," + (base - H * 0.78) + " " + tx + "," + ty, tx: tx, ty: ty };
   }
 
   // body used only to clip the flesh fillets (head left, tail base right, no fin)
@@ -116,41 +119,42 @@
     var clip = el("clipPath", { id: "smBodyClip" }, defs);
     el("path", { d: BODY }, clip);
 
-    /* (1) skeleton */
+    /* (1) skeleton — spine, skull, tail, and the whole ribcage */
     var sk = el("g", { "class": "sm-skel" }, svg);
     el("path", { d: "M182,250 C400,245 650,247 856,250", "class": "sm-spine" }, sk);
-    for (var x = 210; x <= 838; x += 26) el("line", { x1: x, y1: 242, x2: x, y2: 258, "class": "sm-bone" }, sk);
-    for (var rx = 250; rx <= 800; rx += 34) {
-      var depth = 90 * Math.sqrt(Math.max(0, 1 - Math.pow((rx - 470) / 400, 2)));
-      el("path", { d: "M" + rx + ",256 q " + (8 + rnd() * 4).toFixed(1) + "," + (depth * 0.5).toFixed(1) + " -7," + (depth * 0.85).toFixed(1), "class": "sm-bone thin", "clip-path": "url(#smBodyClip)" }, sk);
-      if (rx < 720) el("path", { d: "M" + rx + ",244 q " + (6 + rnd() * 4).toFixed(1) + "," + (-depth * 0.4).toFixed(1) + " -5," + (-depth * 0.62).toFixed(1), "class": "sm-bone thin", "clip-path": "url(#smBodyClip)" }, sk);
-    }
     // skull + eye + gill arch
-    el("path", { d: "M182,250 C168,212 150,196 120,194 C94,192 78,214 77,240 C76,260 90,288 122,300 C152,310 172,288 182,250 Z", "class": "sm-bone" }, sk);
-    el("path", { d: "M150,205 C150,238 150,262 150,296", "class": "sm-bone thin" }, sk);
+    el("path", { d: "M182,250 C168,212 150,196 120,194 C94,192 78,214 77,240 C76,260 90,288 122,300 C152,310 172,288 182,250 Z", "class": "sm-rib skull" }, sk);
+    el("path", { d: "M150,205 C150,238 150,262 150,296", "class": "sm-rib" }, sk);
     el("circle", { cx: 120, cy: 236, r: 11, "class": "sm-eye-socket" }, sk);
     el("circle", { cx: 120, cy: 236, r: 4.5, "class": "sm-eye" }, sk);
+    // the ribcage: dorsal + ventral ribs the whole length (leave gaps for selectors)
+    var pickX = CUTS.map(function (c) { return c.bx; });
+    for (var x = 205; x <= 828; x += 21) {
+      if (pickX.some(function (px) { return Math.abs(px - x) < 11; })) continue;
+      var H = bodyH(x);
+      el("path", { d: ribPath(x, 246, H, 1), "class": "sm-rib", "clip-path": "url(#smBodyClip)" }, sk);
+      el("path", { d: ribPath(x, 254, H, -1), "class": "sm-rib", "clip-path": "url(#smBodyClip)" }, sk);
+      el("line", { x1: x, y1: 245, x2: x, y2: 255, "class": "sm-vert" }, sk);
+    }
     // tail rays
     [[962, 182], [968, 214], [970, 250], [968, 286], [962, 318]].forEach(function (t) {
-      el("line", { x1: 856, y1: 250, x2: t[0], y2: t[1], "class": "sm-bone" }, sk);
-    });
-    el("line", { x1: 900, y1: 206, x2: 906, y2: 294, "class": "sm-bone thin" }, sk);
-    // small decorative neural spines between the selectors
-    [230, 382, 543, 700, 838].forEach(function (nx) {
-      el("line", { x1: nx, y1: 246, x2: nx, y2: 196, "class": "sm-bone thin" }, sk);
+      el("line", { x1: 856, y1: 250, x2: t[0], y2: t[1], "class": "sm-rib tail" }, sk);
     });
 
-    /* (2) selector bones — one organic bone per category */
+    /* (2) the 4 raised selector ribs — same rib, bolder + lifted above the rest */
     CUTS.forEach(function (c, i) {
+      // its ventral (down) rib stays part of the cage
+      el("path", { d: ribPath(c.bx, 254, bodyH(c.bx), -1), "class": "sm-rib", "clip-path": "url(#smBodyClip)" }, sk);
       var g = el("g", { "class": "sm-pick d" + i, "data-cat": c.cat, role: "button", tabindex: "0", "aria-pressed": "false", "aria-label": c.label + ", " + counts[c.cat] + " items" }, svg);
       var lift = el("g", { "class": "sm-lift" }, g);
-      var bx = c.bx, yTop = 118, yBot = 250, L = c.lean || 0;
-      el("path", { d: bonePath(bx, yTop, yBot, L), "class": "sm-bone-shape" }, lift);
-      el("path", { d: "M" + (bx + L * 0.4) + "," + (yTop + 24) + " C" + (bx + L) + "," + (yTop + 70) + " " + (bx + L) + "," + (yBot - 70) + " " + (bx + L * 0.4) + "," + (yBot - 24), "class": "sm-bone-ridge" }, lift);
-      el("text", { x: bx, y: yTop + 9, "text-anchor": "middle", "class": "sm-jp" }, lift).textContent = c.jp;    // kanji on knuckle
-      el("text", { x: bx, y: 97, "text-anchor": "middle", "class": "sm-name" }, lift).textContent = c.name;      // name above
-      el("text", { x: bx, y: 79, "text-anchor": "middle", "class": "sm-count" }, lift).textContent = counts[c.cat] + " ITEMS";
-      el("rect", { x: bx - 20, y: yTop - 24, width: 40, height: (yBot - yTop) + 44, fill: "transparent", "class": "sm-hit" }, g);
+      var P = pickRib(c.bx, 248);
+      el("path", { d: P.d, "class": "sm-pick-out" }, lift);
+      el("path", { d: P.d, "class": "sm-pick-fill" }, lift);
+      el("circle", { cx: P.tx, cy: P.ty, r: 11, "class": "sm-pick-knob" }, lift);
+      el("text", { x: P.tx, y: P.ty + 5, "text-anchor": "middle", "class": "sm-jp" }, lift).textContent = c.jp;
+      el("text", { x: P.tx, y: P.ty - 24, "text-anchor": "middle", "class": "sm-name" }, lift).textContent = c.name;
+      el("text", { x: P.tx, y: P.ty - 42, "text-anchor": "middle", "class": "sm-count" }, lift).textContent = counts[c.cat] + " ITEMS";
+      el("rect", { x: c.bx - 16, y: P.ty - 46, width: 44, height: (248 - P.ty) + 52, fill: "transparent", "class": "sm-hit" }, g);
       groupByCat[c.cat] = g;
       g.addEventListener("mouseenter", function () { hoverBone(c.cat, true); });
       g.addEventListener("mouseleave", function () { hoverBone(c.cat, false); });
