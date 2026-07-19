@@ -1066,20 +1066,62 @@ details[open] .faq-x::after { background: var(--shu); }
 .n3-hint i { color: var(--shu); font-style: normal; padding: 0 6px; }
 .n3-stage { position: relative; flex: 1; width: 100%; min-height: 62vh; }
 
-/* photoreal layered nigiri, assembled by scroll (js/nigiri-hero.js) */
-.nh-stage { position: absolute; inset: 0; display: grid; place-items: center; }
-.nh-nigiri { position: relative; width: min(600px, 82vw); aspect-ratio: 1216 / 896; }
-.nh-layer { position: absolute; will-change: transform, opacity; }
-.nh-rice, .nh-salmon {
-  inset: 0; width: 100%; height: 100%; object-fit: contain;
-  filter: drop-shadow(0 24px 30px rgba(24, 19, 16, .16));
+/* cinematic hero video BLENDED into the page (js/nigiri-hero.js).
+   Tall section + sticky pin = the video holds still while scroll drives it.
+   The ORIGINAL clip is used untouched — no colour grade, no filter, so its
+   brightness and quality are exactly as shot. It's blended by matching the PAGE
+   to the CLIP instead of the other way round: a "studio pool" whose centre is the
+   same cool neutral grey as the clip's seamless backdrop (sampled from the file),
+   dissolving outward — first holding that neutral grey through the whole zone the
+   clip covers, then warming to the paper cream only at the very edge where the
+   clip is already gone. The clip is object-fit:contain (whole composition always
+   visible, never cropped) and feathered with a radial mask, so its grey backdrop
+   melts into the matching pool and the pool melts into paper — a luminous studio
+   window in the page, never a rectangular video block, sushi untouched. */
+.nigiri3d.hero-blend { position: relative; height: 340vh; background: var(--paper); border-top: 0; }
+.hero-blend .n3-pin {
+  position: sticky; top: 0; height: 100vh; min-height: 100vh; overflow: hidden;
+  /* studio pool tuned to THIS clip's backdrop (sampled from the file: a cool
+     neutral grey ~#b8bdba with a soft vignette). Three layers, painted back→front:
+       1. the grey pool itself — the clip's backdrop colour, so the feathered edge
+          of the clip melts into an identical grey with no seam on any screen;
+       2. a soft top wash lifting the clip's slightly darker upper band back to the
+          pool grey (sits BEHIND the clip, so the sushi's pixels stay untouched);
+       3. a top+bottom paper melt so the whole pinned panel dissolves into the
+          paper sections above and below — never a rectangle sitting on the page. */
+  background:
+    linear-gradient(180deg,
+      var(--paper) 0%, rgba(242,237,226,0) 15%,
+      rgba(242,237,226,0) 85%, var(--paper) 100%),
+    radial-gradient(140% 56% at 50% -6%,
+      rgba(188,193,190,0.5) 0%, rgba(188,193,190,0) 58%),
+    radial-gradient(135% 120% at 50% 49%,
+      #bcc1be 0%, #b6bbb8 42%, #b1b5b2 60%, #bcbab1 72%,
+      #cfc9bc 82%, #e3ddd0 90%, var(--paper) 100%);
 }
-/* assembled base positions (also the no-JS resting state) */
-.nh-salmon { transform: translateY(-15%); transform-origin: 50% 50%; }
-.nh-nori {
-  width: 16.5%; left: 50%; top: 50%;
-  transform: translate(-50%, -50%) translateY(4.4%);
+/* The clip is sized to its OWN 16:9 box (never letterboxed inside a bigger frame):
+   width/height resolve to whichever fits the pin, so the element edges ARE the clip
+   edges on every aspect ratio. That lets one radial mask — transparent exactly at
+   those edges (50% radii), opaque across the central 60% where the sushi lives —
+   feather all four sides to nothing on desktop AND portrait. The clip is never a
+   block; it's a luminous oval of studio light melting into the pool, then the page.
+   No colour touched: only alpha at the rim and the page colour around it change. */
+.hero-blend #n3-video {
+  position: absolute; top: 50%; left: 50%;
+  width:  min(100%, calc(100vh * 16 / 9));
+  height: min(100%, calc(100vw * 9 / 16));
+  object-fit: cover; display: block; z-index: 0; pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.94); transform-origin: 50% 50%;
+  -webkit-mask-image: radial-gradient(50% 50% at 50% 50%, #000 60%, transparent 100%);
+  mask-image: radial-gradient(50% 50% at 50% 50%, #000 60%, transparent 100%);
 }
+.hero-blend .n3-head, .hero-blend .n3-stage { position: relative; z-index: 1; }
+.n3-fallback[hidden] { display: none; }
+.hero-blend .n3-fb-img {
+  -webkit-mask-image: radial-gradient(70% 70% at 50% 50%, #000 52%, transparent 100%);
+  mask-image: radial-gradient(70% 70% at 50% 50%, #000 52%, transparent 100%);
+}
+.n3-fb-img { max-width: min(560px, 84vw); height: auto; display: block; }
 .n3-caption {
   position: absolute; left: max(24px, 4vw); bottom: 8vh;
   max-width: 30ch; pointer-events: none;

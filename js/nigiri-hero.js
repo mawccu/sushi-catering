@@ -1,102 +1,116 @@
 /* ============================================================================
- * Nigiri hero (js/nigiri-hero.js) — photoreal layers, assembled by scroll
+ * Hero scroll-scrub (js/nigiri-hero.js)
  * ----------------------------------------------------------------------------
- * The #nigiri3d hero. Three photoreal cutouts (Higgsfield-generated, then
- * background-removed) — rice, salmon, nori band — start split apart and
- * converge into a finished salmon nigiri as you scroll through the pinned
- * section. Rice settles, the salmon slice descends and drapes, the nori band
- * wraps last. Pure transforms; no video, no WebGL.
+ * The #nigiri3d hero: a cinematic sushi film scrubbed by scroll. The section is
+ * tall (see CSS height:340vh) with a position:sticky pin, so the video holds
+ * still while you scroll through the section. Progress is read every frame
+ * straight from the section's getBoundingClientRect — NO ScrollTrigger, no GSAP
+ * pin — which is the most reliable way to tie playback to scroll. currentTime is
+ * eased toward the target for a smooth scrub; the MP4 is all-keyframe so seeking
+ * is frame-accurate.
  *
- * RESILIENCE:
- *  - The layers' ASSEMBLED positions live in CSS, so with no JS / no GSAP /
- *    reduced-motion the nigiri simply renders finished and centered.
- *  - The exploded start + the scroll choreography are applied only by this JS.
- *  - Transforms are written every frame the section is on-screen (rAF + IO),
- *    driven by ScrollTrigger progress.
+ * The video is primed with a muted play()->pause() on the first scroll/gesture
+ * so the browser will render seeked frames (some browsers won't until it has
+ * played once). Reduced-motion / load failure => poster or #n3-fallback.
  * ==========================================================================*/
 (function () {
   "use strict";
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var hasST = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
-
-  function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
-  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
-  function seg(p, a, b) { return clamp01((p - a) / (b - a)); }
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
 
   function init() {
     var sec = document.getElementById("nigiri3d");
     if (!sec) return;
-    var rice = sec.querySelector(".nh-rice");
-    var salmon = sec.querySelector(".nh-salmon");
-    var nori = sec.querySelector(".nh-nori");
-    if (!rice || !salmon || !nori) return;
+    var video = document.getElementById("n3-video");
+    if (!video) return;
 
-    /* apply the exploded/assembled state for a given global progress p */
-    function render(p) {
-      var rp = easeOut(seg(p, 0.0, 0.34));     // rice settles
-      var sp = easeOut(seg(p, 0.30, 0.70));    // salmon descends + drapes
-      var np = easeOut(seg(p, 0.62, 1.0));     // nori wraps last
+    video.addEventListener("error", function () {
+      video.style.display = "none";
+      var cap = document.getElementById("n3-caption"); if (cap) cap.hidden = true;
+      var fb = document.getElementById("n3-fallback"); if (fb) fb.hidden = false;
+    });
 
-      rice.style.opacity = rp;
-      rice.style.transform = "translateY(" + ((1 - rp) * 30).toFixed(2) + "%)";
+    video.muted = true; video.playsInline = true;
+    try { video.load(); } catch (e) {}
 
-      salmon.style.opacity = sp;
-      salmon.style.transform =
-        "translateY(" + (-15 + (1 - sp) * -150).toFixed(2) + "%) " +
-        "rotate(" + ((1 - sp) * -6).toFixed(2) + "deg)";
-
-      nori.style.opacity = np;
-      nori.style.transform =
-        "translate(-50%,-50%) translateY(" + (4.4 + (1 - np) * -300).toFixed(2) + "%)";
+    // prime so the browser decodes/renders seeked frames
+    var primed = false;
+    function prime() {
+      if (primed) return; primed = true;
+      var p = video.play();
+      if (p && p.then) p.then(function () { video.pause(); }).catch(function () {});
+      else { try { video.pause(); } catch (e) {} }
     }
+    video.addEventListener("canplay", prime, { once: true });
+    window.addEventListener("pointerdown", prime, { once: true });
+    window.addEventListener("wheel", prime, { once: true, passive: true });
+    window.addEventListener("touchstart", prime, { once: true, passive: true });
+    window.addEventListener("keydown", prime, { once: true });
 
-    /* captions */
     var CAPS = [
-      ["01 — シャリ", "The rice, pressed by hand."],
-      ["02 — ネタ", "Ōra King salmon, draped on."],
-      ["03 — 仕上げ", "Wrapped in nori. One clean bite."]
+      ["鮨 — 01", "Three parts, apart."],
+      ["鮨 — 02", "Coming together."],
+      ["鮨 — 03", "One perfect bite."]
     ];
     var stepEl = sec.querySelector("#n3-caption .n3-step");
     var lineEl = sec.querySelector("#n3-caption .n3-line");
     var lastCap = -1;
     function setCaption(p) {
-      var i = p < 0.34 ? 0 : p < 0.66 ? 1 : 2;
+      var i = p < 0.34 ? 0 : p < 0.72 ? 1 : 2;
       if (i === lastCap) return;
       lastCap = i;
       if (stepEl) stepEl.textContent = CAPS[i][0];
       if (lineEl) lineEl.textContent = CAPS[i][1];
     }
 
-    if (reduced || !hasST) {
-      // Static assembled state (CSS base already positions the layers).
-      rice.style.opacity = salmon.style.opacity = nori.style.opacity = 1;
-      setCaption(1);
-      return;
+    var duration = 0, ready = false;
+    function onMeta() { duration = video.duration || 8; ready = true; }
+    if (video.readyState >= 1) onMeta();
+    else video.addEventListener("loadedmetadata", onMeta);
+
+    if (reduced) { setCaption(0); return; }   // hold on poster
+
+    var cur = 0, seeking = false;
+    video.addEventListener("seeking", function () { seeking = true; });
+    video.addEventListener("seeked", function () { seeking = false; });
+
+    function progress() {
+      var rect = sec.getBoundingClientRect();
+      var total = sec.offsetHeight - window.innerHeight;
+      if (total <= 0) return 0;
+      return clamp(-rect.top / total, 0, 1);
     }
 
-    render(0);   // start exploded
-
-    var progress = 0;
-    gsap.registerPlugin(ScrollTrigger);
-    ScrollTrigger.create({
-      trigger: sec, start: "top top", end: "+=260%", pin: ".n3-pin",
-      onUpdate: function (self) { progress = self.progress; setCaption(progress); }
-    });
-    window.addEventListener("load", function () { ScrollTrigger.refresh(); });
-
-    var visible = true, cur = 0;
-    if (typeof IntersectionObserver !== "undefined") {
-      new IntersectionObserver(function (es) {
-        es.forEach(function (e) { visible = e.isIntersecting; });
-      }, { rootMargin: "200px 0px 200px 0px" }).observe(sec);
+    // Safety net: if scrubbing never actually moves the frame (some browsers
+    // won't render seeks), fall back to plain looping playback so it still moves.
+    var stuckFrames = 0, fellBack = false;
+    function fallbackToPlay() {
+      if (fellBack) return;
+      fellBack = true;
+      video.loop = true;
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {});
     }
+
     function tick() {
       requestAnimationFrame(tick);
-      if (!visible) return;
-      cur += (progress - cur) * 0.16;          // ease toward scroll target
-      if (Math.abs(progress - cur) < 0.0005) cur = progress;
-      render(cur);
+      if (!ready || !duration) return;
+      var p = progress();
+      setCaption(p);
+      if (fellBack) return;   // playback owns the video now
+      var target = p * duration;
+      cur += (target - cur) * 0.2;
+      if (Math.abs(target - cur) < 0.001) cur = target;
+      if (!seeking && video.readyState >= 2) {
+        try { video.currentTime = clamp(cur, 0, duration - 0.001); } catch (e) {}
+      }
+      // detect "asked to scrub well past the start but frame is still at 0"
+      if (target > 0.7 && video.currentTime < 0.12) {
+        if (++stuckFrames > 150) fallbackToPlay();   // ~2.5s of no effect
+      } else {
+        stuckFrames = 0;
+      }
     }
     tick();
   }
