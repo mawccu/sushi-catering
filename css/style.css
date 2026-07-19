@@ -1095,9 +1095,9 @@ details[open] .faq-x::after { background: var(--shu); }
     linear-gradient(180deg,
       var(--paper) 0%, rgba(242,237,226,0) 15%,
       rgba(242,237,226,0) 85%, var(--paper) 100%),
-    radial-gradient(140% 56% at 50% -6%,
+    radial-gradient(140% 56% at 58% -6%,
       rgba(216,209,193,0.5) 0%, rgba(216,209,193,0) 58%),
-    radial-gradient(135% 122% at 50% 52%,
+    radial-gradient(130% 122% at 58% 55%,
       #ded8c8 0%, #d9d2c1 42%, #dcd5c5 60%, #e2dbcc 74%,
       #eae3d5 84%, var(--paper) 98%);
 }
@@ -1109,11 +1109,11 @@ details[open] .faq-x::after { background: var(--shu); }
    block; it's a luminous oval of studio light melting into the pool, then the page.
    No colour touched: only alpha at the rim and the page colour around it change. */
 .hero-blend #n3-video {
-  position: absolute; top: 50%; left: 50%;
+  position: absolute; top: 57%; left: 61%;   /* pushed right + slightly low, off-centre */
   width:  min(100%, calc(100vh * 16 / 9));
   height: min(100%, calc(100vw * 9 / 16));
   object-fit: cover; display: block; z-index: 0; pointer-events: none;
-  transform: translate(-50%, -50%) scale(0.94); transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) scale(1.12); transform-origin: 50% 50%;  /* a little bigger */
   -webkit-mask-image: radial-gradient(50% 50% at 50% 50%, #000 60%, transparent 100%);
   mask-image: radial-gradient(50% 50% at 50% 50%, #000 60%, transparent 100%);
 }
@@ -1124,14 +1124,16 @@ details[open] .faq-x::after { background: var(--shu); }
   mask-image: radial-gradient(70% 70% at 50% 50%, #000 52%, transparent 100%);
 }
 .n3-fb-img { max-width: min(560px, 84vw); height: auto; display: block; }
+/* headline sits in the open space to the upper-left, ABOVE the off-centre sushi
+   but not pinned to the very top (there's breathing room above it). */
 .n3-caption {
-  position: absolute; left: max(24px, 4vw); bottom: 8vh;
-  max-width: 30ch; pointer-events: none;
+  position: absolute; left: max(28px, 6vw); top: 21%; bottom: auto;
+  max-width: 26ch; pointer-events: none;
 }
 .n3-step { color: var(--shu); display: block; margin-bottom: 10px; }
 .n3-line {
-  font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.4rem);
-  line-height: 1.1; letter-spacing: -.015em;
+  font-family: var(--serif); font-size: clamp(1.7rem, 3.4vw, 2.9rem);
+  line-height: 1.08; letter-spacing: -.015em;
 }
 .n3-fallback {
   position: absolute; inset: 0; display: flex; flex-direction: column;
@@ -1145,7 +1147,25 @@ details[open] .faq-x::after { background: var(--shu); }
 
 @media (max-width: 900px) {
   .n3-head { padding-top: 84px; flex-direction: column; align-items: flex-start; gap: 6px; }
-  .n3-caption { bottom: 4vh; }
+  /* portrait: no room to push aside, so centre the clip (a touch bigger) and put
+     the headline above it. Pool recentred to match. */
+  .hero-blend #n3-video {
+    top: 56%; left: 50%; transform: translate(-50%, -50%) scale(1.08);
+  }
+  .hero-blend .n3-pin {
+    background:
+      linear-gradient(180deg,
+        var(--paper) 0%, rgba(242,237,226,0) 15%,
+        rgba(242,237,226,0) 85%, var(--paper) 100%),
+      radial-gradient(150% 52% at 50% -6%,
+        rgba(216,209,193,0.5) 0%, rgba(216,209,193,0) 58%),
+      radial-gradient(120% 118% at 50% 55%,
+        #ded8c8 0%, #d9d2c1 42%, #dcd5c5 60%, #e2dbcc 74%,
+        #eae3d5 84%, var(--paper) 98%);
+  }
+  .n3-caption {
+    top: 16%; bottom: auto; left: max(22px, 7vw); max-width: 20ch;
+  }
 }
 
 /* =========================================================================
