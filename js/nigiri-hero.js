@@ -49,9 +49,9 @@
     window.addEventListener("keydown", prime, { once: true });
 
     var CAPS = [
-      ["鮨 · 01", "Three parts, apart."],
-      ["鮨 · 02", "Coming together."],
-      ["鮨 · 03", "One perfect bite."]
+      ["Step 01", "It starts with warm, seasoned rice."],
+      ["Step 02", "The fish is sliced and laid by hand."],
+      ["Step 03", "Pressed, brushed, ready to serve."]
     ];
     var stepEl = sec.querySelector("#n3-caption .n3-step");
     var lineEl = sec.querySelector("#n3-caption .n3-line");

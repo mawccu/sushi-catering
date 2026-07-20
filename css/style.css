@@ -22,10 +22,11 @@
   --bone-edge: #C9BFA8;
   --line:     rgba(27, 23, 18, .16);
   --line-strong: rgba(27, 23, 18, .8);
-  --serif: "Instrument Serif", Georgia, serif;
+  --serif: "Zen Old Mincho", Georgia, serif;
   --sans:  "Inter", -apple-system, "Segoe UI", sans-serif;
   --mono:  "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
-  --kanji: "Shippori Mincho", serif;
+  --kanji: "Zen Old Mincho", serif;
+  --accent: "Instrument Serif", Georgia, serif;   /* refined italic, accent words only */
   --pad-x: clamp(20px, 5vw, 72px);
   --ease-out: cubic-bezier(.22, 1, .36, 1);
 }
@@ -81,10 +82,12 @@ body::after {
   text-transform: uppercase;
 }
 .serif { font-family: var(--serif); font-weight: 400; }
-.it { font-style: italic; }
+/* Accent words keep a light, true-italic serif so the mincho headings gain a
+   handwritten lift where they need it (e.g. "ceremony."). */
+.it { font-family: var(--accent); font-style: italic; font-weight: 400; }
 .shu { color: var(--shu); }
 
-h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.02; letter-spacing: -.015em; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.04; letter-spacing: -.01em; }
 
 .wrap { max-width: 1360px; margin: 0 auto; padding-inline: var(--pad-x); }
 
@@ -330,6 +333,48 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.02; let
 .band-ink .sec-lede { color: rgba(242, 237, 226, .6); }
 .band-paper2 { background: var(--paper-2); }
 
+/* Centered section header variant */
+.sec-head-center { text-align: center; }
+.sec-head-center .sec-index { justify-content: center; }
+.sec-head-center .sec-index::before { content: ""; height: 1px; width: 64px; background: var(--shu); }
+.sec-head-center .sec-title { max-width: none; margin-inline: auto; }
+.sec-head-center .sec-lede { margin-inline: auto; }
+
+/* =========================================================================
+   HOW IT WORKS — three clear steps
+   ========================================================================= */
+.how-grid {
+  list-style: none;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  counter-reset: how;
+}
+.how-step { position: relative; padding-top: 30px; border-top: 2px solid var(--ink); }
+.how-num {
+  font-family: var(--serif); font-size: clamp(2.4rem, 4vw, 3.4rem);
+  line-height: 1; color: var(--shu); display: block; margin-bottom: 16px;
+}
+.how-step h3 { font-size: clamp(1.4rem, 2.2vw, 1.9rem); margin-bottom: 12px; letter-spacing: -.01em; }
+.how-step p { color: var(--ink-soft); font-size: .96rem; line-height: 1.6; max-width: 34ch; }
+.how-cta { text-align: center; margin-top: clamp(40px, 6vh, 64px); }
+
+@media (max-width: 820px) {
+  .how-grid { grid-template-columns: 1fr; gap: 0; }
+  .how-step { padding: 24px 0; border-top: 1px solid var(--line); }
+  .how-step:first-child { border-top: 2px solid var(--ink); }
+  .how-num { margin-bottom: 8px; }
+  .how-step p { max-width: 60ch; }
+}
+
+/* Inline step markers in the quote builder */
+.build-step-label {
+  font-family: var(--mono); font-size: .68rem; font-weight: 500;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--shu);
+  margin-bottom: 16px; display: flex; align-items: center; gap: 14px;
+}
+.build-step-label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.builder-cols + .build-step-label, .cater-guests + .build-step-label { margin-top: 40px; }
+
 /* =========================================================================
    INTRO / CRAFT (index)
    ========================================================================= */
@@ -350,45 +395,75 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.02; let
 .intro-note { color: var(--ink-soft); font-size: .95rem; max-width: 34ch; }
 
 /* =========================================================================
-   MENU — editorial price list
+   MENU — a real printed menu card
    ========================================================================= */
-.menu-cat { margin-bottom: clamp(60px, 9vh, 110px); }
-.menu-cat:last-child { margin-bottom: 0; }
-.menu-cat-head {
-  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: 20px clamp(30px, 4vw, 80px); align-items: end;
-  margin-bottom: 34px;
+.menu-card {
+  max-width: 940px; margin: 0 auto;
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  box-shadow: 18px 18px 0 rgba(27, 23, 18, .06);
+  padding: clamp(28px, 5vw, 72px) clamp(24px, 5vw, 76px);
 }
-.cat-index { color: var(--gold); margin-bottom: 12px; display: block; }
-.cat-title { font-size: clamp(2rem, 4vw, 3.4rem); }
-.cat-note { color: var(--ink-soft); font-size: .95rem; max-width: 44ch; justify-self: end; text-align: right; }
-.menu-list { list-style: none; border-top: 1px solid var(--line-strong); }
-.menu-row {
-  border-bottom: 1px solid var(--line);
-  padding: 24px 0 22px;
-  position: relative;
-  transition: padding-left .45s var(--ease-out);
+.menu-card-head { text-align: center; margin-bottom: clamp(38px, 5vh, 58px); }
+.menu-card-eyebrow { display: inline-block; color: var(--shu); margin-bottom: 16px; }
+.menu-card-note { color: var(--ink-soft); font-size: .98rem; max-width: 54ch; margin: 0 auto; }
+.menu-legend {
+  list-style: none; display: flex; justify-content: center; flex-wrap: wrap;
+  gap: 10px 22px; margin-top: 24px;
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-soft);
 }
-.menu-row::before {
-  content: ""; position: absolute; left: 0; top: 34px;
-  width: 9px; height: 9px; border-radius: 50%;
-  background: var(--shu);
-  transform: scale(0);
-  transition: transform .35s var(--ease-out);
+.menu-legend li { display: inline-flex; align-items: center; gap: 8px; }
+
+/* dietary badges */
+.mi-badges { display: inline-flex; gap: 5px; margin-left: 10px; vertical-align: middle; }
+.mi-badge {
+  font-family: var(--mono); font-size: .54rem; font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 999px; border: 1px solid currentColor;
+  line-height: 1.5; white-space: nowrap;
 }
-.menu-row:hover { padding-left: 26px; }
-.menu-row:hover::before { transform: scale(1); }
-.mr-main { display: flex; align-items: baseline; gap: 16px; }
-.mr-name { font-family: var(--serif); font-size: clamp(1.35rem, 2vw, 1.8rem); letter-spacing: -.01em; white-space: nowrap; }
-.mr-leader { flex: 1; border-bottom: 1px dotted rgba(27, 23, 18, .4); transform: translateY(-6px); min-width: 30px; }
-.mr-price { font-family: var(--mono); font-size: .82rem; font-weight: 500; letter-spacing: .06em; white-space: nowrap; }
-.mr-sub { display: flex; justify-content: space-between; gap: 26px; margin-top: 7px; }
-.mr-desc { color: var(--ink-soft); font-size: .92rem; max-width: 60ch; }
-.mr-meta { font-family: var(--mono); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); white-space: nowrap; padding-top: 4px; }
-.mr-tags { display: inline-flex; gap: 8px; margin-left: 10px; }
-.mr-tags .tag {
-  font-family: var(--mono); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase;
-  border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px; color: var(--ink-soft);
+.b-veg { color: #4E7A3A; }
+.b-vgn { color: #3E7B5E; }
+.b-gf  { color: var(--gold); }
+.b-raw { color: var(--shu); }
+
+/* category groups */
+.menu-group { margin-top: clamp(42px, 6vh, 66px); }
+.menu-group:first-of-type { margin-top: 0; }
+.menu-group-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 12px;
+}
+.menu-group-title { font-size: clamp(1.7rem, 3.4vw, 2.5rem); letter-spacing: -.01em; }
+.menu-group-seal { font-family: var(--kanji); font-size: 1.5rem; color: var(--shu); line-height: 1; }
+.menu-group-note { color: var(--ink-soft); font-size: .9rem; margin: 12px 0 6px; max-width: 62ch; }
+
+.menu-items { list-style: none; }
+.menu-item { padding: 20px 0 18px; border-bottom: 1px solid var(--line); }
+.menu-item:last-child { border-bottom: 0; }
+.mi-head { display: flex; align-items: baseline; gap: 12px; }
+.mi-name {
+  font-family: var(--serif); font-size: clamp(1.2rem, 2vw, 1.55rem);
+  letter-spacing: -.005em; line-height: 1.2;
+}
+.mi-lead { flex: 1 1 auto; border-bottom: 1.5px dotted rgba(27, 23, 18, .32); transform: translateY(-5px); min-width: 24px; }
+.mi-price {
+  font-family: var(--serif); font-size: 1.35rem; color: var(--ink);
+  white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+.mi-price small { font-family: var(--mono); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); }
+.mi-sub { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; margin-top: 7px; }
+.mi-desc { color: var(--ink-soft); font-size: .92rem; line-height: 1.55; max-width: 64ch; }
+.mi-meta {
+  font-size: .58rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--gold); white-space: nowrap; padding-top: 3px;
+}
+@media (max-width: 560px) {
+  .mi-sub { flex-direction: column; gap: 5px; }
+  .mi-name { font-size: 1.15rem; }
+  .menu-card { box-shadow: 10px 10px 0 rgba(27, 23, 18, .06); }
 }
 
 /* =========================================================================
@@ -508,7 +583,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.02; let
   box-shadow: 14px 14px 0 rgba(27, 23, 18, .12);
 }
 .cart-panel::before {
-  content: "見積書 — ESTIMATE";
+  content: "見積書 · Your estimate";
   display: block;
   font-family: var(--mono); font-size: .62rem; letter-spacing: .3em; text-transform: uppercase;
   color: var(--gold);
@@ -1114,7 +1189,7 @@ details[open] .faq-x::after { background: var(--shu); }
    visible, never cropped) and feathered with a radial mask, so its grey backdrop
    melts into the matching pool and the pool melts into paper — a luminous studio
    window in the page, never a rectangular video block, sushi untouched. */
-.nigiri3d.hero-blend { position: relative; height: 340vh; background: var(--paper); border-top: 0; }
+.nigiri3d.hero-blend { position: relative; height: 260vh; background: var(--paper); border-top: 0; }
 .hero-blend .n3-pin {
   position: sticky; top: 0; height: 100vh; min-height: 100vh; overflow: hidden;
   /* warm pool tuned to THIS clip's GRADED backdrop (the footage is colour-graded
