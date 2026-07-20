@@ -72,7 +72,7 @@
     if (reduced) { setCaption(0); return; }   // hold on poster
 
     var cur = 0, seeking = false, lastFrame = -1;
-    var FPS = 24;   // source clip is 24 fps, all-keyframe (see assets encode)
+    var FPS = 60;   // clip is motion-interpolated to 60 fps, all-keyframe (see assets encode)
     video.addEventListener("seeking", function () { seeking = true; });
     video.addEventListener("seeked", function () { seeking = false; });
 
