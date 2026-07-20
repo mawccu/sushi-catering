@@ -101,7 +101,8 @@
           '<span>© ' + year + ' ' + window.SITE.name + '</span>' +
           '<span>Rolled at dawn · 朝に巻く</span>' +
           '<span>Amman · 31.9539° N, 35.9106° E</span>' +
-        '</div>';
+        '</div>' +
+        '<div class="foot-credit">Made by <a href="https://theoffice.it.com" target="_blank" rel="noopener">The Office Development</a></div>';
     }
 
     // Fill [data-site] placeholders.
