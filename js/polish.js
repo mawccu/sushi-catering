@@ -194,40 +194,44 @@
     });
   }
 
-  /* ---------------- Custom cursor ---------------- */
+  /* ---------------- Custom cursor · chopsticks ----------------
+   * Two lacquered chopsticks follow the pointer; their tips sit exactly at the
+   * hotspot (30,54 in the 64×64 SVG). Pressing pinches the tips together and
+   * inks them vermilion, like picking up a morsel. Only on fine pointers with
+   * motion allowed; the native cursor is hidden only once this succeeds. */
+  var CUR_HOTX = 30, CUR_HOTY = 54;
   function initCursor() {
     if (!finePointer || reduced) return;
-    var dot = document.createElement("div");
-    var ring = document.createElement("div");
-    dot.className = "cursor-dot";
-    ring.className = "cursor-ring";
-    document.body.appendChild(dot);
-    document.body.appendChild(ring);
+    var wrap = document.createElement("div");
+    wrap.className = "cursor-sticks";
+    wrap.setAttribute("aria-hidden", "true");
+    wrap.innerHTML =
+      '<svg viewBox="0 0 64 64" width="64" height="64">' +
+        '<g class="cs-rot">' +
+          '<path class="cs-stick cs-left"  d="M24.2 5 L27.8 5 L26.6 55 L25.4 55 Z"/>' +
+          '<path class="cs-stick cs-right" d="M32.2 5 L35.8 5 L34.6 55 L33.4 55 Z"/>' +
+        '</g>' +
+      '</svg>';
+    document.body.appendChild(wrap);
+    document.documentElement.classList.add("chopsticks-on");
     document.body.classList.add("cursor-hidden");
 
-    var mx = -100, my = -100, rx = -100, ry = -100, shown = false;
     document.addEventListener("mousemove", function (e) {
-      mx = e.clientX; my = e.clientY;
-      if (!shown) { shown = true; document.body.classList.remove("cursor-hidden"); rx = mx; ry = my; }
+      document.body.classList.remove("cursor-hidden");
+      wrap.style.transform = "translate(" + (e.clientX - CUR_HOTX) + "px," + (e.clientY - CUR_HOTY) + "px)";
     }, { passive: true });
-    document.addEventListener("mouseleave", function () {
-      shown = false; document.body.classList.add("cursor-hidden");
-    });
+    document.addEventListener("mouseleave", function () { document.body.classList.add("cursor-hidden"); });
 
-    (function loop() {
-      rx += (mx - rx) * 0.16;
-      ry += (my - ry) * 0.16;
-      dot.style.transform = "translate(" + mx + "px," + my + "px)";
-      ring.style.transform = "translate(" + rx + "px," + ry + "px)";
-      requestAnimationFrame(loop);
-    })();
+    // Press = pinch the tips. Track button state so it survives drags/leaves.
+    document.addEventListener("mousedown", function () { wrap.classList.add("is-press"); });
+    window.addEventListener("mouseup",     function () { wrap.classList.remove("is-press"); });
 
     var HOVER = "a, button, summary, input, textarea, select, label";
     document.addEventListener("mouseover", function (e) {
-      if (e.target.closest && e.target.closest(HOVER)) ring.classList.add("is-hover");
+      if (e.target.closest && e.target.closest(HOVER)) wrap.classList.add("is-hover");
     });
     document.addEventListener("mouseout", function (e) {
-      if (e.target.closest && e.target.closest(HOVER)) ring.classList.remove("is-hover");
+      if (e.target.closest && e.target.closest(HOVER)) wrap.classList.remove("is-hover");
     });
   }
 

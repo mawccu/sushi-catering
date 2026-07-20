@@ -950,27 +950,49 @@ details[open] .faq-x::after { background: var(--shu); }
 .nf-hero p { margin: 26px 0 34px; color: var(--ink-soft); max-width: 40ch; font-size: 1.05rem; }
 
 /* =========================================================================
-   CUSTOM CURSOR (injected by polish.js, pointer:fine only)
+   CUSTOM CURSOR — chopsticks (injected by polish.js, pointer:fine only)
    ========================================================================= */
 @media (pointer: fine) {
-  .cursor-dot, .cursor-ring {
+  /* Hide the native arrow only once JS has actually mounted the chopsticks. */
+  html.chopsticks-on, html.chopsticks-on * { cursor: none !important; }
+
+  .cursor-sticks {
     position: fixed; top: 0; left: 0;
+    width: 64px; height: 64px;
     pointer-events: none; z-index: 3000;
-    border-radius: 50%;
     will-change: transform;
+    transition: opacity .25s var(--ease-out);
   }
-  .cursor-dot { width: 7px; height: 7px; background: var(--shu); margin: -3.5px 0 0 -3.5px; }
-  .cursor-ring {
-    width: 34px; height: 34px; margin: -17px 0 0 -17px;
-    border: 1px solid rgba(193, 58, 28, .7);
-    transition: width .3s var(--ease-out), height .3s var(--ease-out), margin .3s var(--ease-out), background .3s, opacity .3s;
+  .cursor-sticks svg { width: 64px; height: 64px; overflow: visible; display: block; }
+
+  /* held angle — tips stay put at the hotspot (30,54) */
+  .cs-rot { transform-box: view-box; transform-origin: 30px 54px; transform: rotate(28deg); }
+
+  /* Ink lacquer with a light halo so the sticks read on cream AND ink bands. */
+  .cs-stick {
+    fill: var(--ink);
+    stroke: rgba(242, 237, 226, .92); stroke-width: .8;
+    transform-box: view-box;
+    transition: transform .13s var(--ease-out), fill .2s var(--ease-out);
   }
-  .cursor-ring.is-hover {
-    width: 58px; height: 58px; margin: -29px 0 0 -29px;
-    background: rgba(193, 58, 28, .1);
-  }
-  .cursor-hidden .cursor-dot, .cursor-hidden .cursor-ring { opacity: 0; }
+  .cs-left  { transform-origin: 26px 5px; }
+  .cs-right { transform-origin: 34px 5px; }
+
+  /* hover an interactive element: sticks lift a touch (scale the SVG, never the
+     wrap — the wrap's transform is the pointer position and must stay instant) */
+  .cursor-sticks svg { transition: transform .18s var(--ease-out); transform-origin: 30px 54px; }
+  .cursor-sticks.is-hover svg { transform: scale(1.12); }
+
+  /* press: pinch the tips together and ink them vermilion (picking up a bite) */
+  .cursor-sticks.is-press .cs-stick { fill: var(--shu); stroke: rgba(242, 237, 226, .8); }
+  .cursor-sticks.is-press .cs-left  { transform: rotate(-5deg); }
+  .cursor-sticks.is-press .cs-right { transform: rotate(5deg); }
+
+  .cursor-hidden .cursor-sticks { opacity: 0; }
 }
+
+/* Coarse pointers (touch) keep the normal cursor — no chopsticks. */
+@media (pointer: coarse) { .cursor-sticks { display: none; } }
 
 /* =========================================================================
    RESPONSIVE
