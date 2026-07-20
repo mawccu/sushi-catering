@@ -43,7 +43,7 @@
     var m = window.getMenu();
 
     var cats = [
-      ["packages", "Catering Packages", "包", "Priced per guest — we compose, plate, and label everything. The easiest way to order."],
+      ["packages", "Catering Packages", "包", "Priced per guest. We compose, plate, and label everything. The easiest way to order."],
       ["platters", "Party Trays &amp; Platters", "盛", "Ready-to-serve centrepieces that feed a crowd. Pick a tray and you're set."],
       ["rolls",    "Rolls, à la carte",       "巻", "Build your own spread, roll by roll. Eight pieces per roll."],
       ["addons",   "Sides &amp; Extras",       "副", "Round out the table, from edamame to dessert."]
