@@ -71,7 +71,8 @@
 
     if (reduced) { setCaption(0); return; }   // hold on poster
 
-    var cur = 0, seeking = false, lastSet = -1;
+    var cur = 0, seeking = false, lastFrame = -1;
+    var FPS = 24;   // source clip is 24 fps, all-keyframe (see assets encode)
     video.addEventListener("seeking", function () { seeking = true; });
     video.addEventListener("seeked", function () { seeking = false; });
 
@@ -100,15 +101,19 @@
       setCaption(p);
       if (fellBack) return;   // playback owns the video now
       var target = p * duration;
-      cur += (target - cur) * 0.2;
-      if (Math.abs(target - cur) < 0.001) cur = target;
+      // Ease the playhead toward the scroll target. Lenis already smooths the
+      // scroll, so a light lerp here just removes the last micro-jitter.
+      cur += (target - cur) * 0.18;
+      if (Math.abs(target - cur) < 0.0005) cur = target;
       if (!seeking && video.readyState >= 2) {
         var want = clamp(cur, 0, duration - 0.001);
-        // The clip is all-intra at a modest frame rate, so seeking to a time
-        // inside the frame already shown just re-decodes the same picture and
-        // stutters. Only issue a new seek once we've moved ~half a frame away · // far fewer decodes, much smoother scrub.
-        if (lastSet < 0 || Math.abs(want - lastSet) >= 0.028) {
-          try { video.currentTime = want; lastSet = want; } catch (e) {}
+        // The clip is all-keyframe, so seeks are cheap. Snap to the NEAREST real
+        // frame and only seek when that frame index actually changes: exactly one
+        // decode per displayed frame, landed mid-frame so the picture is crisp —
+        // no redundant re-decodes of the same frame, no back-and-forth jitter.
+        var frame = Math.round(want * FPS);
+        if (frame !== lastFrame) {
+          try { video.currentTime = (frame + 0.5) / FPS; lastFrame = frame; } catch (e) {}
         }
       }
       // detect "asked to scrub well past the start but frame is still at 0"

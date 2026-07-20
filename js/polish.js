@@ -34,9 +34,10 @@
     if (!reduced && typeof window.Lenis !== "undefined") {
       try {
         lenis = new Lenis({
-          duration: 1.15,
-          easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
-          smoothWheel: true
+          lerp: 0.085,          // silky continuous follow (lower = smoother/heavier)
+          wheelMultiplier: 1,
+          smoothWheel: true,
+          syncTouch: false      // leave touch scrolling native
         });
         window.__lenis = lenis;
         if (hasGsap) {
