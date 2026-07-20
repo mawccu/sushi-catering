@@ -1044,8 +1044,48 @@ details[open] .faq-x::after { background: var(--shu); }
   .testimonial { max-width: 100%; }
   .testimonial:nth-child(3) { margin-left: 0; }
   .price-row { flex-wrap: wrap; }
-  .hero { padding-top: 120px; }
+
+  /* --- hero: keep the big headline from clipping / overflowing on phones --- */
+  .hero { padding-top: 116px; }
   .hero-disc { top: 4%; right: -22vw; width: 68vw; }
+  .hero-title { font-size: clamp(2.3rem, 12vw, 3.4rem); letter-spacing: -.02em; line-height: .98; }
+  .hero-title .indent { padding-left: 22px; }
+  .hero-tagline { font-size: 1rem; }
+  .hero-cta-row { gap: 16px 20px; margin-top: 22px; }
+  .hero-cta-row .cta { padding: 15px 26px; }
+  .hero-meta-top { position: static; margin-bottom: 8px; }
+
+  /* --- tighter section rhythm on mobile --- */
+  .sec { padding-top: clamp(64px, 10vh, 90px); padding-bottom: clamp(64px, 10vh, 90px); }
+  .sec-title { font-size: clamp(2.2rem, 8.5vw, 3rem); }
+  .sec-head { margin-bottom: 36px; }
+
+  /* --- menu card: edge-to-edge feel, no wasted side padding --- */
+  .menu-card { padding: 22px 18px; box-shadow: 6px 6px 0 rgba(27, 23, 18, .06); }
+  .menu-group-title { font-size: 1.3rem; }
+
+  /* --- how-it-works & step labels --- */
+  .how-cta { margin-top: 32px; }
+
+  /* --- full-width tap-friendly primary buttons --- */
+  #booking-form button[type="submit"] { width: 100%; justify-content: center; padding: 18px 24px; }
+  .cater-toolbar { flex-direction: column; align-items: stretch; }
+  .cater-toolbar .btn { width: 100%; text-align: center; }
+}
+
+/* Overlay nav: allow it to scroll and shrink on short/small screens so all
+   links stay reachable. */
+@media (max-width: 900px) {
+  #nav-overlay { overflow-y: auto; padding-block: 88px; justify-content: flex-start; }
+  #nav-overlay a { font-size: clamp(2rem, 8.5vw, 3.2rem); }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+  .hero-title { font-size: 2.05rem; }
+  .cg-field input[type="number"] { font-size: 1.9rem; width: 100px; }
+  .mi-name { font-size: .95rem; }
+  .mi-price { font-size: 1.02rem; }
 }
 
 /* =========================================================================
@@ -1293,6 +1333,9 @@ details[open] .faq-x::after { background: var(--shu); }
 .n3-fb-line { font-family: var(--serif); font-size: clamp(1.3rem, 3vw, 2rem); }
 
 @media (max-width: 900px) {
+  /* Shorter scrub on phones: 320vh is 3+ screens of scrolling on a small
+     device. 190vh keeps the effect but roughly halves the scroll cost. */
+  .nigiri3d.hero-blend { height: 190vh; }
   .n3-head { padding-top: 84px; flex-direction: column; align-items: flex-start; gap: 6px; }
   /* portrait: no room to push aside, so centre the clip (a touch bigger) and put
      the headline above it. Pool recentred to match. */
