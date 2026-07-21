@@ -48,43 +48,43 @@ window.MENU = {
   packages: [
     { id: "pkg-omakase", name: "Omakase Feast", category: "packages", unit: "per person", serves: 1, pieces: 0,
       price: 32, tags: ["raw","cooked"],
-      desc: "Chef's premium selection: nigiri, sashimi, and signature specialty rolls, plated to impress." },
+      desc: "Chef's nigiri, sashimi, and specialty rolls." },
     { id: "pkg-classic", name: "Classic Roll Spread", category: "packages", unit: "per person", serves: 1, pieces: 0,
       price: 24, tags: ["cooked"],
-      desc: "A crowd-pleasing mix of California, spicy tuna, and shrimp tempura rolls with edamame." },
+      desc: "California, spicy tuna, and tempura rolls, plus edamame." },
     { id: "pkg-garden", name: "Garden Vegetarian", category: "packages", unit: "per person", serves: 1, pieces: 0,
       price: 20, tags: ["vegetarian","vegan"],
-      desc: "All-veggie rolls, avocado, cucumber, sweet potato tempura, and inari, plus miso soup." }
+      desc: "All-veggie rolls, inari, and miso soup." }
   ],
   // PLATTERS / PARTY TRAYS, flat price each, serves several.
   platters: [
     { id: "plt-rainbow", name: "Rainbow Party Tray", category: "platters", unit: "tray", serves: 8, pieces: 64,
       price: 95, tags: ["raw","cooked"],
-      desc: "64 pieces: assorted maki and nigiri topped with fresh salmon, tuna, and yellowtail." },
+      desc: "Assorted maki and nigiri: salmon, tuna, yellowtail." },
     { id: "plt-dragon", name: "Dragon Deluxe Tray", category: "platters", unit: "tray", serves: 10, pieces: 80,
       price: 120, tags: ["cooked"],
-      desc: "80 pieces of our chef's specialty rolls: dragon, caterpillar, and volcano." },
+      desc: "Chef's specialty rolls: dragon, caterpillar, volcano." },
     { id: "plt-sashimi", name: "Premium Sashimi Boat", category: "platters", unit: "platter", serves: 12, pieces: 60,
       price: 165, tags: ["raw"],
-      desc: "60 slices of the day's freshest fish, artfully arranged on a wooden boat." },
+      desc: "The day's freshest fish, on a wooden boat." },
     { id: "plt-veggie", name: "Garden Veggie Tray", category: "platters", unit: "tray", serves: 8, pieces: 64,
       price: 78, tags: ["vegetarian","vegan"],
-      desc: "64 pieces of colorful vegetable maki, no fish, all flavor." }
+      desc: "Colorful vegetable maki, no fish." }
   ],
   // A LA CARTE ROLLS, flat price each, one roll (8 pcs) serves ~2.
   rolls: [
     { id: "roll-california", name: "California Roll", category: "rolls", unit: "each", serves: 2, pieces: 8,
-      price: 8, tags: ["cooked"], desc: "Crab, avocado, cucumber. The timeless classic." },
+      price: 8, tags: ["cooked"], desc: "Crab, avocado, cucumber." },
     { id: "roll-spicytuna", name: "Spicy Tuna Roll", category: "rolls", unit: "each", serves: 2, pieces: 8,
-      price: 10, tags: ["raw"], desc: "Fresh tuna with a kick of spicy mayo and scallion." },
+      price: 10, tags: ["raw"], desc: "Tuna, spicy mayo, scallion." },
     { id: "roll-dragon", name: "Dragon Roll", category: "rolls", unit: "each", serves: 2, pieces: 8,
-      price: 14, tags: ["cooked"], desc: "Shrimp tempura and eel, crowned with avocado." },
+      price: 14, tags: ["cooked"], desc: "Shrimp tempura, eel, avocado." },
     { id: "roll-salmonavo", name: "Salmon Avocado Roll", category: "rolls", unit: "each", serves: 2, pieces: 8,
-      price: 9, tags: ["raw"], desc: "Buttery salmon and ripe avocado." },
+      price: 9, tags: ["raw"], desc: "Salmon and ripe avocado." },
     { id: "roll-sweetpotato", name: "Sweet Potato Roll", category: "rolls", unit: "each", serves: 2, pieces: 8,
-      price: 7, tags: ["vegetarian","vegan"], desc: "Crispy tempura sweet potato with a sweet glaze." },
+      price: 7, tags: ["vegetarian","vegan"], desc: "Tempura sweet potato, sweet glaze." },
     { id: "roll-rainbow", name: "Rainbow Roll", category: "rolls", unit: "each", serves: 2, pieces: 8,
-      price: 13, tags: ["raw"], desc: "California roll draped in assorted sashimi." }
+      price: 13, tags: ["raw"], desc: "California roll under assorted sashimi." }
   ],
   // ADD-ONS, flat price each.
   addons: [

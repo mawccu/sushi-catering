@@ -43,10 +43,10 @@
     var m = window.getMenu();
 
     var cats = [
-      ["packages", "Catering Packages", "包", "Priced per guest. We compose, plate, and label everything. The easiest way to order."],
-      ["platters", "Party Trays &amp; Platters", "盛", "Ready-to-serve centrepieces that feed a crowd. Pick a tray and you're set."],
-      ["rolls",    "Rolls, à la carte",       "巻", "Build your own spread, roll by roll. Eight pieces per roll."],
-      ["addons",   "Sides &amp; Extras",       "副", "Round out the table, from edamame to dessert."]
+      ["packages", "Catering Packages", "包", "Priced per guest. We compose, plate, and label everything."],
+      ["platters", "Party Trays &amp; Platters", "盛", "Ready-to-serve centrepieces for a crowd."],
+      ["rolls",    "Rolls, à la carte",       "巻", "Build your own spread. Eight pieces per roll."],
+      ["addons",   "Sides &amp; Extras",       "副", "Round out the table."]
     ];
 
     var groups = cats.map(function (c) {
@@ -80,8 +80,7 @@
       '<div class="menu-card">' +
         '<div class="menu-card-head" data-reveal>' +
           '<span class="menu-card-eyebrow mono">お品書き · The Menu</span>' +
-          '<p class="menu-card-note">Every order is hand-rolled the morning of your event from sustainably sourced fish. ' +
-            'Prices are in Jordanian dinar.</p>' +
+          '<p class="menu-card-note">Hand-rolled the morning of your event. Prices in JOD.</p>' +
           '<ul class="menu-legend">' +
             '<li><span class="mi-badge b-veg">Veg</span> Vegetarian</li>' +
             '<li><span class="mi-badge b-vgn">Vegan</span> Vegan</li>' +
