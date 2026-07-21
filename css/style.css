@@ -1295,7 +1295,7 @@ details[open] .faq-x::after { background: var(--shu); }
   width:  min(100%, calc(100vh * 16 / 9));
   height: min(100%, calc(100vw * 9 / 16));
   object-fit: cover; display: block; z-index: 0; pointer-events: none;
-  transform: translate(-50%, -50%) scale(1.12); transform-origin: 50% 50%;  /* a little bigger */
+  transform: translate(-50%, -50%) scale(0.9); transform-origin: 50% 50%;  /* zoomed out to keep the render soft/small, hiding low-res detail */
   -webkit-mask-image: radial-gradient(50% 50% at 50% 50%, #000 60%, transparent 100%);
   mask-image: radial-gradient(50% 50% at 50% 50%, #000 60%, transparent 100%);
 }
@@ -1348,7 +1348,7 @@ details[open] .faq-x::after { background: var(--shu); }
   /* portrait: no room to push aside, so centre the clip (a touch bigger) and put
      the headline above it. Pool recentred to match. */
   .hero-blend #n3-video {
-    top: 56%; left: 50%; transform: translate(-50%, -50%) scale(1.08);
+    top: 56%; left: 50%; transform: translate(-50%, -50%) scale(0.9);
   }
   .hero-blend .n3-pin {
     background:
