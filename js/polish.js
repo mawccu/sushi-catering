@@ -23,6 +23,10 @@
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var finePointer = window.matchMedia("(pointer: fine)").matches;
+  // Touch devices: Lenis doesn't drive touch scroll, which left the scroll-reveal
+  // animations stuck (content hidden / scattered). On touch we skip the whole
+  // smooth-scroll + reveal system: native scroll, content static and visible.
+  var coarse = window.matchMedia("(pointer: coarse)").matches;
   var hasGsap = typeof window.gsap !== "undefined";
   var hasST = hasGsap && typeof window.ScrollTrigger !== "undefined";
   var lenis = null;
@@ -31,7 +35,7 @@
     if (hasST) gsap.registerPlugin(ScrollTrigger);
 
     /* ---------------- Lenis smooth scroll ---------------- */
-    if (!reduced && typeof window.Lenis !== "undefined") {
+    if (!reduced && !coarse && typeof window.Lenis !== "undefined") {
       try {
         lenis = new Lenis({
           lerp: 0.085,          // silky continuous follow (lower = smoother/heavier)
@@ -66,7 +70,9 @@
       else target.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
     });
 
-    if (!hasGsap || reduced) { initCursor(); return; }
+    // Touch/reduced-motion: stop before any reveal/parallax/hero-intro motion so
+    // nothing can get stuck mid-animation. Content renders static and visible.
+    if (!hasGsap || reduced || coarse) { if (!coarse) initCursor(); return; }
 
     /* ---------------- Hero intro ---------------- */
     var heroLines = gsap.utils.toArray(".hero .kl > span");

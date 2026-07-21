@@ -1341,16 +1341,16 @@ details[open] .faq-x::after { background: var(--shu); }
 .n3-fb-line { font-family: var(--serif); font-size: clamp(1.3rem, 3vw, 2rem); }
 
 @media (max-width: 900px) {
-  /* Shorter scrub on phones: 320vh is 3+ screens of scrolling on a small
-     device. 190vh keeps the effect but roughly halves the scroll cost. */
-  .nigiri3d.hero-blend { height: 190vh; }
+  /* Phones: drop the tall pinned scroll-scrub entirely (it was 190vh of mostly
+     empty scrolling — a huge dead gap). Make it a normal, short section that
+     just shows the finished piece. */
+  .nigiri3d.hero-blend { height: auto; }
   .n3-head { padding-top: 84px; flex-direction: column; align-items: flex-start; gap: 6px; }
-  /* portrait: no room to push aside, so centre the clip (a touch bigger) and put
-     the headline above it. Pool recentred to match. */
   .hero-blend #n3-video {
-    top: 56%; left: 50%; transform: translate(-50%, -50%) scale(0.8);
+    top: 56%; left: 50%; transform: translate(-50%, -50%) scale(0.86);
   }
   .hero-blend .n3-pin {
+    position: static; height: auto; min-height: 68vh;
     background:
       linear-gradient(180deg,
         var(--paper) 0%, rgba(242,237,226,0) 15%,
